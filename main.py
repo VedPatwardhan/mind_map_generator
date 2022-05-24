@@ -5,7 +5,7 @@ from graph import *
 from utils import *
 import sys
 
-URL, lemmatizer, identifier, drawer = "https://script.spoken-tutorial.org/index.php/Apps-On-Physics/C2/Simple-Machines/English-timed", 3, 1, 1
+URL, lemmatizer, identifier, drawer = "https://script.spoken-tutorial.org/index.php/Apps-On-Physics/C2/Simple-Machines/English-timed", 3, 2, 2
 if len(sys.argv) == 5:
     URL, lemmatizer, identifier = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
 
