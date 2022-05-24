@@ -1,0 +1,11 @@
+beautifulsoup4
+requests
+yake
+nltk
+stanza
+networkx
+matplotlib
+keybert
+spacy
+numpy
+gensim
