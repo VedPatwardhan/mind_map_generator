@@ -6,7 +6,7 @@ from graph import *
 from utils import *
 import sys
 
-URL, lemmatizer, identifier, drawer = "https://script.spoken-tutorial.org/index.php/Apps-On-Physics/C2/Simple-Machines/English-timed", 3, 2, 2
+URL, lemmatizer, identifier, drawer = "https://script.spoken-tutorial.org/index.php/Apps-On-Physics/C2/Simple-Machines/English-timed", 3, 2, 1
 if len(sys.argv) == 5:
     URL, lemmatizer, identifier = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
 
@@ -60,6 +60,9 @@ for i in range(len(URLS)):
 
 doc_indices = []
 for i in range(len(URLS)):
-    doc_indices[i] = generate_indices(doc_filtered_keywords[i], doc_sentences[i])
+    doc_indices.append(generate_indices(doc_filtered_keywords[i], doc_sentences[i]))
+
+for indices in doc_indices:
+    print(indices, end='\n')
 
 draw_graph(doc_filtered_keywords, doc_indices, doc_heading, doc_sentences, rule_based=drawer==1)

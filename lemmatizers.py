@@ -1,3 +1,4 @@
+from functools import cache
 from nltk.stem import WordNetLemmatizer
 import spacy
 import stanza
@@ -5,16 +6,33 @@ import stanza
 load_model = spacy.load('en_core_web_sm', disable = ['parser','ner'])
 stanza_pipeline = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma')
 
+cache_nltk= {}
+cache_spacy = {}
+cache_stanford = {}
+
 def nltk_lemmatizer(sentences):
     lemmatizer = WordNetLemmatizer()
     for i in range(len(sentences)):
-        sentences[i] = [lemmatizer.lemmatize(word) for word in sentences[i]]
+        lemma = []
+        for word in sentences[i]:
+            if word not in cache_nltk.keys():
+                lemma.append(lemmatizer.lemmatize(word))
+                cache_nltk[word] = lemma[-1]
+            else:
+                lemma.append(cache_nltk[word])
+        sentences[i] = lemma
     return sentences
     
 def spacy_lemmatizer(sentences):
     word_lengths = [len(sentence) for sentence in sentences]
     doc = load_model(' '.join([' '.join(sentence) for sentence in sentences]))
-    lemmatized_output = [token.lemma_ for token in doc]
+    lemmatized_output = []
+    for token in doc:
+        if token not in cache_spacy.keys():
+            lemmatized_output.append(token.lemma_)
+            cache_spacy[token] = lemmatized_output[-1]
+        else:
+            lemmatized_output.append(cache_spacy[token])
     sentences = []
     curr = 0
     for word_length in word_lengths:
@@ -24,8 +42,14 @@ def spacy_lemmatizer(sentences):
 
 def stanfordcorenlp_lemmatizer(sentences):
     word_lengths = [len(sentence) for sentence in sentences]
-    lemmatized_output = stanza_pipeline(' '.join([' '.join(sentence) for sentence in sentences])).to_dict()[0]
-    lemmatized_output = [token['lemma'] for token in lemmatized_output]
+    doc = stanza_pipeline(' '.join([' '.join(sentence) for sentence in sentences])).to_dict()[0]
+    lemmatized_output = []
+    for token in doc:
+        if token['text'] not in cache_stanford.keys():
+            lemmatized_output.append(token['lemma'])
+            cache_stanford[token['text']] = lemmatized_output[-1]
+        else:
+            lemmatized_output.append(cache_stanford[token['text']])
     sentences = []
     curr = 0
     for word_length in word_lengths:
