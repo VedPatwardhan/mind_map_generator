@@ -11,8 +11,6 @@ if len(sys.argv) == 5:
     URL, lemmatizer, identifier = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
 
 URLS = get_urls()
-for URL in URLS:
-    print(URL)
 
 doc_sentences = []
 doc_heading = []
@@ -43,7 +41,7 @@ for i in range(len(URLS)):
 
 doc_filtered_keywords = []
 for i in range(len(URLS)):
-    print("\n----------------------------------------------------------------------------------")
+    print("\n----------------------------------------------------------------------------------\n")
     print("URL: ", URLS[i])
     display = True
     filtered_keywords = {}
@@ -61,8 +59,5 @@ for i in range(len(URLS)):
 doc_indices = []
 for i in range(len(URLS)):
     doc_indices.append(generate_indices(doc_filtered_keywords[i], doc_sentences[i]))
-
-for indices in doc_indices:
-    print(indices, end='\n')
 
 draw_graph(doc_filtered_keywords, doc_indices, doc_heading, doc_sentences, rule_based=drawer==1)
