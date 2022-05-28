@@ -6,3 +6,13 @@ def get_contributors():
             lines[i] = lines[i].strip('\n').lower()
             contributors += lines[i].split()
     return set(contributors)
+
+
+def get_urls():
+    urls = []
+    with open('urls.txt') as f:
+        lines = f.readlines()
+        for i in range(len(lines)):
+            lines[i] = lines[i].strip('\n')
+            urls += lines[i].split()
+    return urls

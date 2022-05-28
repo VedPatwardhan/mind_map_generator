@@ -5,11 +5,14 @@ np.random.seed(0)
 from word2vec import *
 
 
-def draw_graph(keywords, indices, heading, sentences, rule_based=False):
+def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based=False):
     G = nx.Graph()
 
-    words = [heading] + list(keywords.keys())
-    keywords[heading] = 1
+    words = []
+    for i in range(len(doc_keywords)):
+        words += list(doc_keywords[i].keys())
+        doc_keywords[i][doc_heading[i]] = 1
+    words = list(set(words))
 
     nodes, colors = [], ['red', 'purple', 'blue', 'green', 'yellow', 'orange']
     k = 0
@@ -19,14 +22,13 @@ def draw_graph(keywords, indices, heading, sentences, rule_based=False):
         k = (k + 1) % len(colors)
 
     if rule_based:
-        adjacency_matrix, threshold = get_proximity_adjacency_matrix(words, indices)
+        adjacency_matrix, threshold = get_proximity_adjacency_matrix(words, doc_indices, doc_heading)
     else:
         for i in range(0, len(words)):
             for j in range(i+1, len(words)):
                 G.add_edge(words[i], words[j])
-        adjacency_matrix, threshold = get_trained_adjacency_matrix(words, sentences)
+        adjacency_matrix, threshold = get_trained_adjacency_matrix(words, doc_sentences)
     
-    G = nx.Graph()
     G.add_nodes_from(nodes)
     for i in range(0, len(words)):
         for j in range(i+1, len(words)):
@@ -40,7 +42,7 @@ def draw_graph(keywords, indices, heading, sentences, rule_based=False):
     plt.show()
 
 
-def get_proximity_adjacency_matrix(words, indices):
+def get_proximity_adjacency_matrix(words, doc_indices, doc_heading):
     proximity_matrix = np.zeros((len(words), len(words)))
     for i in range(1, len(words)):
         proximity_matrix[0][i] = 1
