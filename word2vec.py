@@ -22,7 +22,10 @@ def train_word2vec(sentences):
     return embedder
 
 
-def get_adjacency_matrix(adjacency_matrix, words, wv, all_headings):
+def get_adjacency_matrix(adjacency_matrix,
+                         words,
+                         wv,
+                         all_headings):
     for i in range(0, len(words)):
         for j in range(i+1, len(words)):
             if words[i] not in all_headings and words[j] not in all_headings:
@@ -32,7 +35,10 @@ def get_adjacency_matrix(adjacency_matrix, words, wv, all_headings):
     return adjacency_matrix
 
 
-def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, words):
+def get_trained_adjacency_matrix(adjacency_matrix,
+                                 doc_sentences,
+                                 doc_heading,
+                                 words):
     all_sentences, all_headings = [], []
     for i in range(len(doc_heading)):
         heading = doc_heading[i]
@@ -41,7 +47,9 @@ def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, w
         all_headings.append(heading)
     embedder = train_word2vec(all_sentences)
     wv = embedder.wv
-    adjacency_matrix = get_adjacency_matrix(
-        adjacency_matrix, words, wv, all_headings)
+    adjacency_matrix = get_adjacency_matrix(adjacency_matrix,
+                                            words,
+                                            wv,
+                                            all_headings)
     threshold = np.percentile(np.unique(adjacency_matrix), 85)
     return adjacency_matrix, threshold

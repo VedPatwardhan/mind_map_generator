@@ -1,4 +1,3 @@
-from ast import keyword
 from parser import get_text
 from extractors import *
 from lemmatizers import *
@@ -8,7 +7,8 @@ import sys
 
 URL, lemmatizer, identifier, drawer = "https://script.spoken-tutorial.org/index.php/Apps-On-Physics/C2/Simple-Machines/English-timed", 3, 2, 1
 if len(sys.argv) == 5:
-    URL, lemmatizer, identifier = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
+    URL, lemmatizer, identifier = sys.argv[1], int(
+        sys.argv[2]), int(sys.argv[3])
 
 URLS = get_urls()
 
@@ -22,7 +22,8 @@ for URL in URLS:
 contributors = get_contributors()
 for i in range(len(URLS)):
     for j in range(len(doc_sentences[i])):
-        doc_sentences[i][j] = [word for word in doc_sentences[i][j] if word not in contributors]
+        doc_sentences[i][j] = [word for word in doc_sentences[i]
+                               [j] if word not in contributors]
 
 for i in range(len(URLS)):
     if lemmatizer == 1:
@@ -31,7 +32,7 @@ for i in range(len(URLS)):
         doc_sentences[i] = spacy_lemmatizer(doc_sentences[i])
     elif lemmatizer == 3:
         doc_sentences[i] = stanfordcorenlp_lemmatizer(doc_sentences[i])
-    
+
 doc_keywords = []
 for i in range(len(URLS)):
     if identifier == 1:
@@ -58,6 +59,11 @@ for i in range(len(URLS)):
 
 doc_indices = []
 for i in range(len(URLS)):
-    doc_indices.append(generate_indices(doc_filtered_keywords[i], doc_sentences[i]))
+    doc_indices.append(generate_indices(
+        doc_filtered_keywords[i], doc_sentences[i]))
 
-draw_graph(doc_filtered_keywords, doc_indices, doc_heading, doc_sentences, rule_based=drawer==1)
+draw_graph(doc_filtered_keywords,
+           doc_indices,
+           doc_heading,
+           doc_sentences,
+           rule_based=drawer == 1)

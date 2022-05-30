@@ -1,8 +1,35 @@
+from word2vec import *
 import networkx as nx
+from grave import plot_network
+from grave.style import use_attributes
 import matplotlib.pyplot as plt
 import numpy as np
 np.random.seed(0)
-from word2vec import *
+
+
+def on_click(event):
+    if not hasattr(event, 'nodes') or not event.nodes:
+        return
+
+    # pull out the graph,
+    graph = event.artist.graph
+
+    # clear any non-default color on nodes
+    for node, attributes in graph.nodes.data():
+        attributes.pop('color', None)
+
+    for u, v, attributes in graph.edges.data():
+        attributes.pop('width', None)
+
+    for node in event.nodes:
+        graph.nodes[node]['color'] = 'C1'
+
+        for edge_attribute in graph[node].values():
+            edge_attribute['width'] = 3
+
+    # update the screen
+    event.artist.stale = True
+    event.artist.figure.canvas.draw_idle()
 
 
 def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based=False):
@@ -11,31 +38,57 @@ def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based
     for i in range(len(doc_keywords)):
         words += list(doc_keywords[i].keys())
     words = list(set(words))
-    nodes, colors = [], ['red', 'purple', 'blue', 'green', 'yellow', 'orange']
-    k = 0
+    nodes = []
     for word in words:
-        nodes.append((word, {"color": colors[k], "size": int(len(word)*300)}))
-        k = (k + 1) % len(colors)
+        nodes.append((word))
     adjacency_matrix = np.zeros((len(words), len(words)))
     word_to_idx = {words[idx]: idx for idx in range(len(words))}
-    adjacency_matrix = fill_adjacency_matrix_for_headings(adjacency_matrix, word_to_idx, doc_indices, doc_heading, doc_keywords)
+    adjacency_matrix = fill_adjacency_matrix_for_headings(adjacency_matrix,
+                                                          word_to_idx,
+                                                          doc_indices,
+                                                          doc_heading,
+                                                          doc_keywords)
     if rule_based:
-        adjacency_matrix, threshold = get_proximity_adjacency_matrix(adjacency_matrix, word_to_idx, doc_indices, doc_keywords)
+        adjacency_matrix, threshold = get_proximity_adjacency_matrix(adjacency_matrix,
+                                                                     word_to_idx,
+                                                                     doc_indices,
+                                                                     doc_keywords)
     else:
-        adjacency_matrix, threshold = get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, words)
+        adjacency_matrix, threshold = get_trained_adjacency_matrix(adjacency_matrix,
+                                                                   doc_sentences,
+                                                                   doc_heading,
+                                                                   words)
     G.add_nodes_from(nodes)
     for i in range(0, len(words)):
         for j in range(i+1, len(words)):
             if adjacency_matrix[i][j] >= threshold:
                 G.add_edge(words[i], words[j])
-    node_colors = list(nx.get_node_attributes(G, "color").values())
-    node_sizes = list(nx.get_node_attributes(G, "size").values())
-    pos = nx.kamada_kawai_layout(G)
-    nx.draw(G, pos=pos, with_labels=True, font_weight='bold', node_color=node_colors, node_size=node_sizes)
+    fig, ax = plt.subplots()
+    art = plot_network(G,
+                       ax=ax,
+                       layout="kamada_kawai",
+                       node_style=use_attributes(),
+                       edge_style=use_attributes(),
+                       node_label_style={'bbox':  dict(boxstyle='round',
+                                                       ec=(0.0, 0.0, 0.0),
+                                                       fc=(1.0, 1.0, 1.0),
+                                                       ),
+                                         'font_size': 8,
+                                         'font_weight': 'bold',
+                                         })
+
+    art.set_picker(10)
+    ax.set_title('Mind map')
+    fig.set_size_inches(8, 6)
+    fig.canvas.mpl_connect('pick_event', on_click)
     plt.show()
 
 
-def fill_adjacency_matrix_for_headings(adjacency_matrix, word_to_idx, doc_indices, doc_heading, doc_keywords):
+def fill_adjacency_matrix_for_headings(adjacency_matrix,
+                                       word_to_idx,
+                                       doc_indices,
+                                       doc_heading,
+                                       doc_keywords):
     for i in range(len(doc_indices)):
         heading = doc_heading[i]
         keywords = doc_keywords[i]
@@ -50,7 +103,10 @@ def fill_adjacency_matrix_for_headings(adjacency_matrix, word_to_idx, doc_indice
     return adjacency_matrix
 
 
-def get_proximity_adjacency_matrix(adjacency_matrix, word_to_idx, doc_indices, doc_keywords):
+def get_proximity_adjacency_matrix(adjacency_matrix,
+                                   word_to_idx,
+                                   doc_indices,
+                                   doc_keywords):
     for i in range(len(doc_indices)):
         indices = doc_indices[i]
         keywords = doc_keywords[i]
@@ -65,6 +121,7 @@ def get_proximity_adjacency_matrix(adjacency_matrix, word_to_idx, doc_indices, d
                 keyword_idx2 = word_to_idx[keyword2]
                 for x in range(len(keyword_indices1)):
                     for y in range(len(keyword_indices2)):
-                        adjacency_matrix[keyword_idx1][keyword_idx2] += (keyword_indices1[x] - keyword_indices2[y]) ** (-2)
+                        adjacency_matrix[keyword_idx1][keyword_idx2] += (
+                            keyword_indices1[x] - keyword_indices2[y]) ** (-2)
     threshold = np.percentile(np.unique(adjacency_matrix), 85)
     return adjacency_matrix, threshold

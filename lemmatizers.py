@@ -1,14 +1,15 @@
-from functools import cache
 from nltk.stem import WordNetLemmatizer
 import spacy
 import stanza
 
-load_model = spacy.load('en_core_web_sm', disable = ['parser','ner'])
-stanza_pipeline = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma')
+load_model = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
+stanza_pipeline = stanza.Pipeline(
+    lang='en', processors='tokenize,mwt,pos,lemma')
 
-cache_nltk= {}
+cache_nltk = {}
 cache_spacy = {}
 cache_stanford = {}
+
 
 def nltk_lemmatizer(sentences):
     lemmatizer = WordNetLemmatizer()
@@ -22,10 +23,12 @@ def nltk_lemmatizer(sentences):
                 lemma.append(cache_nltk[word])
         sentences[i] = lemma
     return sentences
-    
+
+
 def spacy_lemmatizer(sentences):
     word_lengths = [len(sentence) for sentence in sentences]
-    doc = load_model(' '.join([' '.join(sentence) for sentence in sentences]))
+    doc = load_model(' '.join(
+        [' '.join(sentence) for sentence in sentences]))
     lemmatized_output = []
     for token in doc:
         if token not in cache_spacy.keys():
@@ -40,9 +43,12 @@ def spacy_lemmatizer(sentences):
         curr += word_length
     return sentences
 
+
 def stanfordcorenlp_lemmatizer(sentences):
     word_lengths = [len(sentence) for sentence in sentences]
-    doc = stanza_pipeline(' '.join([' '.join(sentence) for sentence in sentences])).to_dict()[0]
+    doc = stanza_pipeline(' '.join(
+        [' '.join(sentence) for sentence in sentences]
+    )).to_dict()[0]
     lemmatized_output = []
     for token in doc:
         if token['text'] not in cache_stanford.keys():
