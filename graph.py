@@ -7,32 +7,51 @@ import numpy as np
 np.random.seed(0)
 
 
-def on_click(event):
+def add_edges_based_on_threshold(G,
+                                 words,
+                                 adjacency_matrix,
+                                 threshold):
+    for i in range(0, len(words)):
+        for j in range(i+1, len(words)):
+            if adjacency_matrix[i][j] >= threshold:
+                G.add_edge(words[i], words[j])
+
+
+def on_click(event,
+             adjacency_matrix,
+             doc_heading,
+             words):
     if not hasattr(event, 'nodes') or not event.nodes:
         return
-
     # pull out the graph,
     graph = event.artist.graph
-
     # clear any non-default color on nodes
     for node, attributes in graph.nodes.data():
         attributes.pop('color', None)
-
     for u, v, attributes in graph.edges.data():
         attributes.pop('width', None)
-
     for node in event.nodes:
+        node_selected = node
+        adjacency_matrix = update_adjacency_matrix(adjacency_matrix,
+                                                   doc_heading,
+                                                   words,
+                                                   node_selected)
+        threshold = np.percentile(np.unique(adjacency_matrix), 85)
+        graph.remove_edges_from(graph.edges())
+        add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
         graph.nodes[node]['color'] = 'C1'
-
         for edge_attribute in graph[node].values():
             edge_attribute['width'] = 3
-
     # update the screen
     event.artist.stale = True
     event.artist.figure.canvas.draw_idle()
 
 
-def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based=False):
+def draw_graph(doc_keywords,
+               doc_indices,
+               doc_heading,
+               doc_sentences,
+               rule_based=False):
     G = nx.Graph()
     words = doc_heading.copy()
     for i in range(len(doc_keywords)):
@@ -59,10 +78,7 @@ def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based
                                                                    doc_heading,
                                                                    words)
     G.add_nodes_from(nodes)
-    for i in range(0, len(words)):
-        for j in range(i+1, len(words)):
-            if adjacency_matrix[i][j] >= threshold:
-                G.add_edge(words[i], words[j])
+    add_edges_based_on_threshold(G, words, adjacency_matrix, threshold)
     fig, ax = plt.subplots()
     art = plot_network(G,
                        ax=ax,
@@ -73,14 +89,17 @@ def draw_graph(doc_keywords, doc_indices, doc_heading, doc_sentences, rule_based
                                                        ec=(0.0, 0.0, 0.0),
                                                        fc=(1.0, 1.0, 1.0),
                                                        ),
-                                         'font_size': 8,
+                                         'font_size': 10,
                                          'font_weight': 'bold',
                                          })
 
     art.set_picker(10)
     ax.set_title('Mind map')
     fig.set_size_inches(8, 6)
-    fig.canvas.mpl_connect('pick_event', on_click)
+    fig.canvas.mpl_connect('pick_event', lambda event: on_click(event,
+                                                                adjacency_matrix,
+                                                                doc_heading,
+                                                                words))
     plt.show()
 
 
