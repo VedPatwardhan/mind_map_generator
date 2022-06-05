@@ -45,8 +45,6 @@ def on_click(event,
         for edge_attribute in graph[node].values():
             edge_attribute['width'] = 3
     # update the screen
-    # plt.clf()
-    # event.artist.figure.canvas.draw_idle()
     Artist.remove(event.artist)
     event.artist = plot_network(graph,
                                 ax=ax,
@@ -63,8 +61,6 @@ def on_click(event,
                                                   'font_weight': 'bold',
                                                   })
     event.artist.set_picker(10)
-    # ax.set_title('Mind map')
-    # event.artist.stale = True
     event.artist.figure.canvas.draw_idle()
 
 
