@@ -69,7 +69,7 @@ def get_trained_adjacency_matrix(adjacency_matrix,
                                             words,
                                             wv,
                                             all_headings)
-    threshold = np.percentile(np.unique(adjacency_matrix), 85)
+    threshold = np.percentile(np.unique(adjacency_matrix), 92)
     return adjacency_matrix, threshold
 
 

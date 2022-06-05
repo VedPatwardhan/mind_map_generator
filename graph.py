@@ -3,6 +3,7 @@ import networkx as nx
 from grave import plot_network
 from grave.style import use_attributes
 import matplotlib.pyplot as plt
+from matplotlib.artist import Artist
 import numpy as np
 np.random.seed(0)
 
@@ -20,7 +21,8 @@ def add_edges_based_on_threshold(G,
 def on_click(event,
              adjacency_matrix,
              doc_heading,
-             words):
+             words,
+             ax):
     if not hasattr(event, 'nodes') or not event.nodes:
         return
     # pull out the graph,
@@ -36,14 +38,33 @@ def on_click(event,
                                                    doc_heading,
                                                    words,
                                                    node_selected)
-        threshold = np.percentile(np.unique(adjacency_matrix), 85)
+        threshold = np.percentile(np.unique(adjacency_matrix), 92)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
         graph.nodes[node]['color'] = 'C1'
         for edge_attribute in graph[node].values():
             edge_attribute['width'] = 3
     # update the screen
-    event.artist.stale = True
+    # plt.clf()
+    # event.artist.figure.canvas.draw_idle()
+    Artist.remove(event.artist)
+    event.artist = plot_network(graph,
+                                ax=ax,
+                                layout="kamada_kawai",
+                                node_style=use_attributes(),
+                                edge_style=use_attributes(),
+                                node_label_style={'bbox':  dict(boxstyle='round',
+                                                                ec=(0.0,
+                                                                    0.0, 0.0),
+                                                                fc=(1.0,
+                                                                    1.0, 1.0),
+                                                                ),
+                                                  'font_size': 10,
+                                                  'font_weight': 'bold',
+                                                  })
+    event.artist.set_picker(10)
+    # ax.set_title('Mind map')
+    # event.artist.stale = True
     event.artist.figure.canvas.draw_idle()
 
 
@@ -92,14 +113,14 @@ def draw_graph(doc_keywords,
                                          'font_size': 10,
                                          'font_weight': 'bold',
                                          })
-
     art.set_picker(10)
     ax.set_title('Mind map')
-    fig.set_size_inches(8, 6)
+    fig.set_size_inches(12, 9)
     fig.canvas.mpl_connect('pick_event', lambda event: on_click(event,
                                                                 adjacency_matrix,
                                                                 doc_heading,
-                                                                words))
+                                                                words,
+                                                                ax))
     plt.show()
 
 
@@ -142,5 +163,5 @@ def get_proximity_adjacency_matrix(adjacency_matrix,
                     for y in range(len(keyword_indices2)):
                         adjacency_matrix[keyword_idx1][keyword_idx2] += (
                             keyword_indices1[x] - keyword_indices2[y]) ** (-2)
-    threshold = np.percentile(np.unique(adjacency_matrix), 85)
+    threshold = np.percentile(np.unique(adjacency_matrix), 92)
     return adjacency_matrix, threshold
