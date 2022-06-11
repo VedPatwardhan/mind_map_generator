@@ -56,6 +56,7 @@ for i in range(len(URLS)):
             filtered_keywords[kw[1]] = kw[0]
             print(kw[1], ' --> ', kw[0])
     doc_filtered_keywords.append(filtered_keywords)
+print("\n----------------------------------------------------------------------------------\n")
 
 doc_indices = []
 for i in range(len(URLS)):

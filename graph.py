@@ -2,10 +2,20 @@ from word2vec import *
 import networkx as nx
 from grave import plot_network
 from grave.style import use_attributes
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.artist import Artist
 import numpy as np
 np.random.seed(0)
+cmap = matplotlib.cm.cool
+
+
+def get_style(attr):
+    return {   
+        'bbox':  {'boxstyle': 'round', 'ec': attr['color'], 'fc': (1.0, 1.0, 1.0)},
+        'font_size': 10,
+        'font_weight': 'bold',
+    }
 
 
 def add_edges_based_on_threshold(G,
@@ -28,8 +38,6 @@ def on_click(event,
     # pull out the graph,
     graph = event.artist.graph
     # clear any non-default color on nodes
-    for node, attributes in graph.nodes.data():
-        attributes.pop('color', None)
     for u, v, attributes in graph.edges.data():
         attributes.pop('width', None)
     for node in event.nodes:
@@ -41,9 +49,10 @@ def on_click(event,
         threshold = np.percentile(np.unique(adjacency_matrix), 92)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
-        graph.nodes[node]['color'] = 'C1'
+        color = [style['color'] for node, style in graph.nodes(data=True) if node == node_selected][0]
         for edge_attribute in graph[node].values():
             edge_attribute['width'] = 3
+            edge_attribute['color'] = color
     # update the screen
     Artist.remove(event.artist)
     event.artist = plot_network(graph,
@@ -51,15 +60,7 @@ def on_click(event,
                                 layout="kamada_kawai",
                                 node_style=use_attributes(),
                                 edge_style=use_attributes(),
-                                node_label_style={'bbox':  dict(boxstyle='round',
-                                                                ec=(0.0,
-                                                                    0.0, 0.0),
-                                                                fc=(1.0,
-                                                                    1.0, 1.0),
-                                                                ),
-                                                  'font_size': 10,
-                                                  'font_weight': 'bold',
-                                                  })
+                                node_label_style=get_style)
     event.artist.set_picker(10)
     event.artist.figure.canvas.draw_idle()
 
@@ -74,9 +75,11 @@ def draw_graph(doc_keywords,
     for i in range(len(doc_keywords)):
         words += list(doc_keywords[i].keys())
     words = list(set(words))
-    nodes = []
+    k = 0
+    colors = [cmap(i)[:3] for i in np.linspace(0, 1, 20)]
     for word in words:
-        nodes.append((word))
+        G.add_node(word, color=colors[k])
+        k = (k + 1) % len(colors)
     adjacency_matrix = np.zeros((len(words), len(words)))
     word_to_idx = {words[idx]: idx for idx in range(len(words))}
     adjacency_matrix = fill_adjacency_matrix_for_headings(adjacency_matrix,
@@ -94,7 +97,6 @@ def draw_graph(doc_keywords,
                                                                    doc_sentences,
                                                                    doc_heading,
                                                                    words)
-    G.add_nodes_from(nodes)
     add_edges_based_on_threshold(G, words, adjacency_matrix, threshold)
     fig, ax = plt.subplots()
     art = plot_network(G,
@@ -102,13 +104,7 @@ def draw_graph(doc_keywords,
                        layout="kamada_kawai",
                        node_style=use_attributes(),
                        edge_style=use_attributes(),
-                       node_label_style={'bbox':  dict(boxstyle='round',
-                                                       ec=(0.0, 0.0, 0.0),
-                                                       fc=(1.0, 1.0, 1.0),
-                                                       ),
-                                         'font_size': 10,
-                                         'font_weight': 'bold',
-                                         })
+                       node_label_style=get_style)
     art.set_picker(10)
     ax.set_title('Mind map')
     fig.set_size_inches(12, 9)
