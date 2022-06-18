@@ -1,6 +1,9 @@
+from dotenv import dotenv_values
+env = dotenv_values(".env")
+
 def get_contributors():
     contributors = []
-    with open('contributors.txt') as f:
+    with open(env['CONTRIBUTORS']) as f:
         lines = f.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].strip('\n').lower()
@@ -10,7 +13,7 @@ def get_contributors():
 
 def get_urls():
     urls = []
-    with open('urls.txt') as f:
+    with open(env['URLS']) as f:
         lines = f.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].strip('\n')
