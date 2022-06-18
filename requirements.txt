@@ -10,3 +10,5 @@ spacy
 numpy
 gensim
 grave
+django
+python-dotenv
