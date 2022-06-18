@@ -1,5 +1,32 @@
-{% extends "base.html" %}
-
-{% block page_content %}
-<h1>Mind Map</h1>
+{% extends "base.html" %} {% block page_content %}
+{% load static %}
+<div class="pt-3">
+  <h1 class="title">Mind Map Generator</h1>
+</div>
+<div class="row mt-5 d-flex flex-row align-items-center">
+  <div class="col-md-4">
+    <form action="" class="url-form">
+      <div class="d-flex flex-row justify-content-evenly">
+        <button class="my-button" onclick="addInput(event)">Add URL</button>
+        <button class="my-button" onclick="removeInput(event)">
+          Remove URL
+        </button>
+      </div>
+      <div
+        class="d-flex flex-column justify-content-center align-items-center"
+        id="inputs"
+      >
+        <input type="text" class="my-text" placeholder="Enter the URL" />
+      </div>
+      <div class="d-flex flex-row justify-content-center">
+        <button class="my-button submit-button" onclick="generateMindMap(event)">
+          Generate Mind Map
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-8 img-container">
+    <img src="{% static 'img/sample.png' %}" class="my-img">
+  </div>
+</div>
 {% endblock %}
