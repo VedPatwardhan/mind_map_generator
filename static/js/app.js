@@ -18,12 +18,15 @@ const removeInput = (event) => {
 }
 
 const generateMindMap = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    const text_inputs = document.querySelectorAll('.my-text');
+
+    // event.preventDefault();
+    // event.stopPropagation();
 }
 
 const getInput = () => {
     const text_input = document.createElement("INPUT");
+    text_input.setAttribute('name', 'url');
     text_input.setAttribute('type', 'text');
     text_input.setAttribute('class', 'my-text');
     text_input.setAttribute('placeholder', 'Enter the URL');

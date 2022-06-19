@@ -1,4 +1,3 @@
-from word2vec import *
 import networkx as nx
 from grave import plot_network
 from grave.style import use_attributes
@@ -6,6 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.artist import Artist
 import numpy as np
+from main_code.word2vec import *
 np.random.seed(0)
 cmap = matplotlib.cm.cool
 
@@ -69,7 +69,8 @@ def draw_graph(doc_keywords,
                doc_indices,
                doc_heading,
                doc_sentences,
-               rule_based=False):
+               rule_based=False,
+               draw=True):
     G = nx.Graph()
     words = doc_heading.copy()
     for i in range(len(doc_keywords)):
@@ -113,7 +114,9 @@ def draw_graph(doc_keywords,
                                                                 doc_heading,
                                                                 words,
                                                                 ax))
-    plt.show()
+    if draw:
+        plt.show()
+    return fig
 
 
 def fill_adjacency_matrix_for_headings(adjacency_matrix,
