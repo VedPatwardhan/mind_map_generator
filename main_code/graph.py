@@ -2,6 +2,7 @@ import networkx as nx
 from grave import plot_network
 from grave.style import use_attributes
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.artist import Artist
 import numpy as np
@@ -11,7 +12,7 @@ cmap = matplotlib.cm.cool
 
 
 def get_style(attr):
-    return {   
+    return {
         'bbox':  {'boxstyle': 'round', 'ec': attr['color'], 'fc': (1.0, 1.0, 1.0)},
         'font_size': 10,
         'font_weight': 'bold',
@@ -49,7 +50,8 @@ def on_click(event,
         threshold = np.percentile(np.unique(adjacency_matrix), 92)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
-        color = [style['color'] for node, style in graph.nodes(data=True) if node == node_selected][0]
+        color = [style['color'] for node, style in graph.nodes(
+            data=True) if node == node_selected][0]
         for edge_attribute in graph[node].values():
             edge_attribute['width'] = 3
             edge_attribute['color'] = color
@@ -99,7 +101,9 @@ def draw_graph(doc_keywords,
                                                                    doc_heading,
                                                                    words)
     add_edges_based_on_threshold(G, words, adjacency_matrix, threshold)
-    fig, ax = plt.subplots()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
     art = plot_network(G,
                        ax=ax,
                        layout="kamada_kawai",
@@ -116,7 +120,6 @@ def draw_graph(doc_keywords,
                                                                 ax))
     if draw:
         plt.show()
-    return fig
 
 
 def fill_adjacency_matrix_for_headings(adjacency_matrix,

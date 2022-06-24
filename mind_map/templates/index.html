@@ -24,7 +24,7 @@
     </form>
   </div>
   <div class="col-md-7 col-11 img-container m-3">
-    <img src="{% static 'img/sample.png' %}" class="my-img" />
+    <img src="data:image/png;base64,{{ graphic|safe }}" class="my-img" />
   </div>
 </div>
 {% endblock %}

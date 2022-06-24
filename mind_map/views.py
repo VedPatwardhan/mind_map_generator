@@ -1,4 +1,8 @@
+from io import BytesIO
+import base64
+import cv2
 from django.shortcuts import render
+from django.conf import settings
 from main_code.parser import get_text
 from main_code.extractors import *
 from main_code.lemmatizers import *
@@ -47,12 +51,21 @@ def index(request):
         for i in range(len(URLS)):
             doc_indices.append(generate_indices(
                 doc_filtered_keywords[i], doc_sentences[i]))
-        # fig = draw_graph(doc_filtered_keywords,
-        #                  doc_indices,
-        #                  doc_heading,
-        #                  doc_sentences,
-        #                  rule_based=False,
-        #                  draw=False)
-        return render(request, 'index.html', {})
+        draw_graph(doc_filtered_keywords,
+                   doc_indices,
+                   doc_heading,
+                   doc_sentences,
+                   rule_based=False,
+                   draw=False)
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
     else:
-        return render(request, 'index.html', {})
+        img = cv2.imread(settings.STATICFILES_DIRS[0]+"img/sample.png")
+        _, buffer1 = cv2.imencode(".jpg", img)
+        buffer = BytesIO(buffer1)
+    buffer.seek(0)
+    image_png = buffer.getvalue()
+    buffer.close()
+    graphic = base64.b64encode(image_png)
+    graphic = graphic.decode('utf-8')
+    return render(request, 'index.html', {'graphic': graphic})
