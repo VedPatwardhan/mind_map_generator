@@ -1,6 +1,7 @@
-from io import BytesIO
+import matplotlib.pyplot as plt
+import io
 import base64
-import cv2
+import urllib
 from django.shortcuts import render
 from django.conf import settings
 from main_code.parser import get_text
@@ -11,6 +12,7 @@ from main_code.utils import *
 
 
 def index(request):
+    fig = None
     if request.method == "POST":
         URLS = request.POST.getlist('url')
         doc_sentences = []
@@ -51,21 +53,19 @@ def index(request):
         for i in range(len(URLS)):
             doc_indices.append(generate_indices(
                 doc_filtered_keywords[i], doc_sentences[i]))
-        draw_graph(doc_filtered_keywords,
-                   doc_indices,
-                   doc_heading,
-                   doc_sentences,
-                   rule_based=False,
-                   draw=False)
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
+        fig = draw_graph(doc_filtered_keywords,
+                         doc_indices,
+                         doc_heading,
+                         doc_sentences,
+                         rule_based=False,
+                         draw=False)
     else:
-        img = cv2.imread(settings.STATICFILES_DIRS[0]+"img/sample.png")
-        _, buffer1 = cv2.imencode(".jpg", img)
-        buffer = BytesIO(buffer1)
-    buffer.seek(0)
-    image_png = buffer.getvalue()
-    buffer.close()
-    graphic = base64.b64encode(image_png)
-    graphic = graphic.decode('utf-8')
-    return render(request, 'index.html', {'graphic': graphic})
+        fig = plt.figure()
+        img = plt.imread(settings.STATICFILES_DIRS[0]+"img/sample.png")
+        plt.imshow(img)
+    buf = io.BytesIO()
+    fig.savefig(buf,format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    src =  urllib.parse.quote(string)
+    return render(request, 'index.html', {'src': src})

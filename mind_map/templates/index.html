@@ -3,7 +3,7 @@
   <h1 class="title">Mind Map Generator</h1>
 </div>
 <div class="row mt-5 d-flex flex-row justify-content-center align-items-center">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <form class="url-form" method="POST">
       {% csrf_token %} {{form}}
       <div class="d-flex flex-row justify-content-evenly">
@@ -23,8 +23,8 @@
       </div>
     </form>
   </div>
-  <div class="col-md-7 col-11 img-container m-3">
-    <img src="data:image/png;base64,{{ graphic|safe }}" class="my-img" />
+  <div class="col-md-8 col-11 img-container m-3">
+    <img src="data:image/png;base64,{{ src }}" class="my-img"/>
   </div>
 </div>
 {% endblock %}

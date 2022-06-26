@@ -101,7 +101,6 @@ def draw_graph(doc_keywords,
                                                                    doc_heading,
                                                                    words)
     add_edges_based_on_threshold(G, words, adjacency_matrix, threshold)
-
     fig = plt.figure()
     ax = fig.add_subplot(111)
     art = plot_network(G,
@@ -120,6 +119,7 @@ def draw_graph(doc_keywords,
                                                                 ax))
     if draw:
         plt.show()
+    return fig
 
 
 def fill_adjacency_matrix_for_headings(adjacency_matrix,
