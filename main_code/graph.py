@@ -2,11 +2,13 @@ import networkx as nx
 from grave import plot_network
 from grave.style import use_attributes
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.artist import Artist
 import numpy as np
-from main_code.word2vec import *
+try:
+    from .word2vec import *
+except ImportError:
+    from word2vec import *
 np.random.seed(0)
 cmap = matplotlib.cm.cool
 
@@ -47,7 +49,7 @@ def on_click(event,
                                                    doc_heading,
                                                    words,
                                                    node_selected)
-        threshold = np.percentile(np.unique(adjacency_matrix), 92)
+        threshold = np.percentile(np.unique(adjacency_matrix), 95)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
         color = [style['color'] for node, style in graph.nodes(
@@ -119,7 +121,7 @@ def draw_graph(doc_keywords,
                                                                 ax))
     if draw:
         plt.show()
-    return fig
+    return G, adjacency_matrix, doc_heading, words
 
 
 def fill_adjacency_matrix_for_headings(adjacency_matrix,

@@ -1,9 +1,11 @@
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 import io
-import base64
-import urllib
+import json
 from django.shortcuts import render
 from django.conf import settings
+from django.http import JsonResponse
 from main_code.parser import get_text
 from main_code.extractors import *
 from main_code.lemmatizers import *
@@ -14,7 +16,32 @@ from main_code.utils import *
 def index(request):
     fig = None
     if request.method == "POST":
-        URLS = request.POST.getlist('url')
+        json_body = json.loads(request.body)
+        adjacency_matrix = json_body["adjacency_matrix"]
+        doc_heading = json_body["doc_heading"]
+        words = json_body["words"]
+        node_selected = json_body["node_selected"]
+        adjacency_matrix = update_adjacency_matrix(
+            np.array(adjacency_matrix), doc_heading, words, node_selected
+        )
+        threshold = np.percentile(np.unique(adjacency_matrix), 95)
+        response = {
+            "nodes": [
+                (node["id"], {"color": [color / 255 for color in node["color"]]})
+                for node in json_body["nodes"]
+            ],
+            "links": [],
+            "adjacency_matrix": adjacency_matrix.tolist(),
+            "doc_heading": doc_heading,
+            "words": words,
+        }
+        for i in range(len(words)):
+            for j in range(len(words)):
+                if adjacency_matrix[i][j] >= threshold:
+                    response["links"].append((words[i], words[j]))
+        return JsonResponse(response, safe=False)
+    elif len(request.GET.getlist("url")):
+        URLS = [url for url in request.GET.get("url").split(",") if url != ""]
         doc_sentences = []
         doc_heading = []
         for URL in URLS:
@@ -24,8 +51,9 @@ def index(request):
         contributors = get_contributors()
         for i in range(len(URLS)):
             for j in range(len(doc_sentences[i])):
-                doc_sentences[i][j] = [word for word in doc_sentences[i]
-                                       [j] if word not in contributors]
+                doc_sentences[i][j] = [
+                    word for word in doc_sentences[i][j] if word not in contributors
+                ]
         for i in range(len(URLS)):
             doc_sentences[i] = stanfordcorenlp_lemmatizer(doc_sentences[i])
         doc_keywords = []
@@ -34,7 +62,8 @@ def index(request):
         doc_filtered_keywords = []
         for i in range(len(URLS)):
             print(
-                "\n----------------------------------------------------------------------------------\n")
+                "\n----------------------------------------------------------------------------------\n"
+            )
             print("URL: ", URLS[i])
             display = True
             filtered_keywords = {}
@@ -46,26 +75,33 @@ def index(request):
                         display = False
                 if display:
                     filtered_keywords[kw[1]] = kw[0]
-                    print(kw[1], ' --> ', kw[0])
+                    print(kw[1], " --> ", kw[0])
             doc_filtered_keywords.append(filtered_keywords)
-        print("\n----------------------------------------------------------------------------------\n")
+        print(
+            "\n----------------------------------------------------------------------------------\n"
+        )
         doc_indices = []
         for i in range(len(URLS)):
-            doc_indices.append(generate_indices(
-                doc_filtered_keywords[i], doc_sentences[i]))
-        fig = draw_graph(doc_filtered_keywords,
-                         doc_indices,
-                         doc_heading,
-                         doc_sentences,
-                         rule_based=False,
-                         draw=False)
-    else:
-        fig = plt.figure()
-        img = plt.imread(settings.STATICFILES_DIRS[0]+"img/sample.png")
-        plt.imshow(img)
-    buf = io.BytesIO()
-    fig.savefig(buf,format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    src =  urllib.parse.quote(string)
-    return render(request, 'index.html', {'src': src})
+            doc_indices.append(
+                generate_indices(doc_filtered_keywords[i], doc_sentences[i])
+            )
+        G, adjacency_matrix, doc_heading, words = draw_graph(
+            doc_filtered_keywords,
+            doc_indices,
+            doc_heading,
+            doc_sentences,
+            rule_based=False,
+            draw=False,
+        )
+        response = JsonResponse(
+            {
+                "nodes": list(G.nodes(data=True)),
+                "links": list(G.edges()),
+                "adjacency_matrix": adjacency_matrix.tolist(),
+                "doc_heading": doc_heading,
+                "words": words,
+            },
+            safe=False,
+        )
+        return response
+    return render(request, "index.html")
