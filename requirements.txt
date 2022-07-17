@@ -12,3 +12,4 @@ gensim
 grave
 django
 python-dotenv
+django-cors-headers
