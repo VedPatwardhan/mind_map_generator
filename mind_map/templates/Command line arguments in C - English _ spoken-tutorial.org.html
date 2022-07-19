@@ -1,870 +1,2314 @@
 {% load static %}
 <!DOCTYPE html>
 <!-- saved from url=(0080)https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/ -->
-<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="V1Hqs8AUIIf-INbtXJxVdk81O1I3nXHa4Vccfw8oJaI">
-    <title>
-        Command line arguments in C - English | spoken-tutorial.org
-    </title>
-    
-    
-    <meta name="title" content="Command line arguments in C - English">
-    <meta name="description" content="Advanced C is for the programmer who has some experience writing applications in C or a similar language.
+<html class="">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="google-site-verification"
+      content="V1Hqs8AUIIf-INbtXJxVdk81O1I3nXHa4Vccfw8oJaI"
+    />
+    <title>Command line arguments in C - English | spoken-tutorial.org</title>
+
+    <meta name="title" content="Command line arguments in C - English" />
+    <meta
+      name="description"
+      content="Advanced C is for the programmer who has some experience writing applications in C or a similar language.
 
     This includes allocating large data objects which at compile time, is seldom practical, especially if the data objects are used frequently and for a short time. Instead, you usually allocate these data objects at runtime.
 
-    C compiler produces the object module, preprocesses the input file, allocates internal storage for various data-types, creates memory data-structures, standard file I/O library etc.">
-    <meta name="keywords" content="Advance C free training in india,  main() with arguments, argc, argv, advance c video tutorial() ">
+    C compiler produces the object module, preprocesses the input file, allocates internal storage for various data-types, creates memory data-structures, standard file I/O library etc."
+    />
+    <meta
+      name="keywords"
+      content="Advance C free training in india,  main() with arguments, argc, argv, advance c video tutorial() "
+    />
 
-    
-    <meta property="og:site_name" content="Spoken-Tutorial">
-    <meta property="og:url" content="spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/">
-    <meta property="og:title" content="Command line arguments in C in English">
-    <meta property="og:image" content="/media/videos/61/605/Command-line-arguments-in-C-Small.png">
-    <meta property="og:description" content="Advanced C is for the programmer who has some experience writing applications in C or a similar language.
+    <meta property="og:site_name" content="Spoken-Tutorial" />
+    <meta
+      property="og:url"
+      content="spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/"
+    />
+    <meta
+      property="og:title"
+      content="Command line arguments in C in English"
+    />
+    <meta
+      property="og:image"
+      content="/media/videos/61/605/Command-line-arguments-in-C-Small.png"
+    />
+    <meta
+      property="og:description"
+      content="Advanced C is for the programmer who has some experience writing applications in C or a similar language.
 
     This includes allocating large data objects which at compile time, is seldom practical, especially if the data objects are used frequently and for a short time. Instead, you usually allocate these data objects at runtime.
 
-    C compiler produces the object module, preprocesses the input file, allocates internal storage for various data-types, creates memory data-structures, standard file I/O library etc.">
+    C compiler produces the object module, preprocesses the input file, allocates internal storage for various data-types, creates memory data-structures, standard file I/O library etc."
+    />
 
-    <meta property="og:type" content="video">
-    <meta property="og:video" content="/media/videos/61/605/Command-line-arguments-in-C-English.ogv">
-    
-    <meta property="og:video:tag" content="main() with arguments">
-    
-    <meta property="og:video:tag" content=" argc">
-    
-    <meta property="og:video:tag" content=" argv">
-    
-    <meta property="og:video:tag" content=" advance c video tutorial()">
-    
+    <meta property="og:type" content="video" />
+    <meta
+      property="og:video"
+      content="/media/videos/61/605/Command-line-arguments-in-C-English.ogv"
+    />
 
-    
-    
-    <link rel="shortcut icon" href="https://spoken-tutorial.org/static/spoken/images/favicon.ico">
+    <meta property="og:video:tag" content="main() with arguments" />
+
+    <meta property="og:video:tag" content=" argc" />
+
+    <meta property="og:video:tag" content=" argv" />
+
+    <meta property="og:video:tag" content=" advance c video tutorial()" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="https://spoken-tutorial.org/static/spoken/images/favicon.ico"
+    />
     <!-- Bootstrap core CSS -->
     <!-- google fonts -->
-    <link href="{% static 'integration_static/css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'integration_static/css(1)' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'integration_static/css(2)' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'integration_static/css(3)' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'integration_static/css(4)' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static 'integration_static/bootstrap.min.css' %}" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="{% static 'integration_static/font-awesome.min.css' %}" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="{% static 'integration_static/yamm-min.css' %}" type="text/css" media="screen" charset="utf-8">
-    
-    <link href="{% static 'integration_static/video-js.min.css' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static 'integration_static/jquery.fancybox.pack.css' %}" type="text/css" media="screen" charset="utf-8">
+    <link
+      href="{% static 'integration_static/css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'integration_static/css(1)' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'integration_static/css(2)' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'integration_static/css(3)' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'integration_static/css(4)' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/bootstrap.min.css' %}"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/font-awesome.min.css' %}"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/yamm-min.css' %}"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
 
-    <link rel="stylesheet" href="{% static 'integration_static/9fae52e21448.css' %}" type="text/css" media="screen">
-    
-    <link rel="stylesheet" href="{% static 'integration_static/20998b398b8b.css' %}" type="text/css">
-    
-    <style type="text/css">.fancybox-margin{margin-right:15px;}</style><style>.gc-bubbleDefault{background-color:transparent!important;text-align:left;padding:0!important;margin:0!important;border:0!important;table-layout:auto!important}.gc-reset{background-color:transparent!important;border:0!important;padding:0!important;margin:0!important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc!important}.pls-contentLeft,.pls-topTail,.pls-vertShimLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif)!important}.pls-topTail{background-repeat:repeat-x!important;background-position:bottom!important}.pls-vertShim{background-color:#fff!important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5!important}.pls-vertShimLeft{background-repeat:repeat-y!important;background-position:100%!important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2!important}.pls-contentWrap{background-color:#fff!important;position:relative!important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:100%;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png)!important;background-repeat:repeat-y!important;vertical-align:top}.pls-dropBL,.pls-dropTR .pls-dropBR,.pls-tailleft,.pls-vert,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png)!important;background-repeat:repeat-x!important;width:100%;vertical-align:top}.pls-topLeft{background:inherit!important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit!important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit!important;text-align:right}.pls-bottomRight{background:inherit!important;text-align:left;vertical-align:top}.pls-tailbottom,.pls-tailleft,.pls-tailright,.pls-tailtop{display:none;position:relative}.pls-dropBL,.pls-dropBR,.pls-dropTR,.pls-tailbottom,.pls-tailleft,.pls-tailright,.pls-tailtop{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png)!important;background-repeat:no-repeat}.tbl-grey .pls-dropBL,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropTR,.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailleft,.tbl-grey .pls-tailright,.tbl-grey .pls-tailtop{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png)!important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-tailbottom,.pls-topLeft img,.pls-topRight img{vertical-align:bottom}.bubbleDropTR,.pls-bottomLeft,.pls-bottomLeft img,.pls-dropBottom img,.pls-dropBottomL img,.pls-dropBottomR img{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacerbottom,.pls-spacerleft,.pls-spacerright,.pls-spacertop{position:static!important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style></head>
-    <body style="">
-        
-        <div id="slideshow">
-            
-            
-        </div>
+    <link
+      href="{% static 'integration_static/video-js.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/jquery.fancybox.pack.css' %}"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
 
-        <div id="page-wrapper">
-            <a href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#page-wrapper"></a>
-            <!-- header begin -->
-            <div id="header-wrapper">
-                <nav class="navbar yamm navbar-default " role="navigation">
-                    <div id="header-inner">
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
-                                    <span class="sr-only">Toggle Navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                                <a href="https://spoken-tutorial.org/">
-                                    <img src="{% static 'integration_static/logo.png" alt="Spoken-Tutorial logo">
-                                    Spoken <span class="title">Tutorial</span>
-                                </a>
-                            </div>
-                            
-                            <div class="collapse navbar-collapse" id="main-nav">
-                                <ul class="nav navbar-nav">
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">Software Training <b class="caret"></b></a>
-                                        <ul class="dropdown-menu events">
-                                            <div class="yamm-content">
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="col-sm-3 col-md-3 col-lg-3 column first mseprator">
-                                                                <h5 class="media-heading"><b>Software Training</b></h5>
-                                                                <div class="media-body">
-                                                                    <ul class="media-list">
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#About_SELF_Workshops" target="_blank">About the Training</a></li>
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Progress_To_Date" target="_blank">Progress  to Date</a></li>
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Software_Offered" target="_blank">Software Offered</a></li>
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Contacts_For_Training" target="_blank">Contacts for Training</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/change-in-policy/" target="_blank">Change in Training Policy</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-3 col-lg-3 column second mseprator">
-                                                                <h5 class="media-heading"><b>Procedures</b></h5>
-                                                                <div class="media-body">
-                                                                    <ul class="media-list">
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Organising_Training" target="_blank">Organising Training</a></li>
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Downloading_Spoken_Tutorials" target="_blank">Instruction for Downloading Tutorials</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/cdcontent/" target="_blank">Create Your Own Disc Image</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/software-training/resource-center/">Resource Centers</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-3 col-lg-3 column third mseprator">
-                                                                <h5 class="media-heading"><b>Training</b></h5>
-                                                                <div class="media-body">
-                                                                    <ul class="media-list">
-                                                                        <li class=""><a href="https://spoken-tutorial.org/software-training/">Training &amp; Payment Dashboard</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/software-training/training-planner/">Semester Training Planner Summary (STPS)</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/participant/login/">Student Dashboard</a></li>
-                                                                        <li class=""><span class="badge" id="nav-fdp" style="margin-right: 4px;">new</span><span class="text-muted" style="font-size: 1rem;">Individual Learning</span></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/training/list_events/ongoing/" target="_blank">Individual Learning Workshop</a></li>   <li class=""><a href="https://spoken-tutorial.org/training/verify-ilwtest-certificate/" target="_blank">Verify ILW test certificate </a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-3 col-lg-3 column last">
-                                                                <h5 class="media-heading"><b>Online Test</b></h5>
-                                                                <div class="media-body">
-                                                                    <ul class="media-list">
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/images/0/09/Instructions_for_Invigilator.pdf" target="_blank">Instruction for Invigilator</a></li>
-                                                                        <li class=""><a href="https://process.spoken-tutorial.org/images/9/95/Test_Instruction_for_Participants.pdf" target="_blank">Instruction for Participants</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/software-training/test/verify-test-certificate/" target="_blank">Certificate Verification Link</a></li>
-                                                                        <li class=""><a href="https://spoken-tutorial.org/accounts/verify/" target="_blank">Email Verification Link</a></li>
-                                                                        <li class=""><span class="badge" id="nav-fdp" style="margin-right: 4px;">new</span><a href="https://jrs.spoken-tutorial.org/" target="_blank">Job Recommendation</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div></li>
-                                                </div>
-                                            </ul>
-                                        </li>
-                                        <!-- -->
-                                        <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">Creation <b class="caret"></b></a>
-                                            <ul class="dropdown-menu creation">
-                                                <div class="yamm-content">
-                                                    <li>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6 column first mseprator">
-                                                                    <!-- <h5 class="media-heading"><b>Contributor</b></h5> -->
-                                                                    <div class="media-body">
-                                                                        <ul class="media-list">
-                                                                            
-                                                                            <li class=""><a target="_blank" href="https://files.spoken-tutorial.org/english-videos/">Video for Dubbing</a></li>
-                                                                            
-                                                                            <li class=""><a target="_blank" href="https://process.spoken-tutorial.org/index.php/Main_Page">Creation Process</a></li>
-                                                                            <li class=""><a target="_blank" href="https://script.spoken-tutorial.org/index.php/Main_Page">Outline and Script</a></li>
-                                                                            <li class=""><a href="https://spoken-tutorial.org/creation">Creation Dashboard</a></li>
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/9fae52e21448.css' %}"
+      type="text/css"
+      media="screen"
+    />
 
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6 column second">
-                                                                    <!-- <h5 class="media-heading"><b>Indian Language</b></h5> -->
-                                                                    <div class="media-body">
-                                                                        <ul class="media-list">
-                                                                            <li class=""><a href="https://spoken-tutorial.org/creation/suggest-a-topic/">Suggest a Topic</a></li>
-                                                                            <li class=""><a href="https://spoken-tutorial.org/creation/suggest-an-example/">Suggest an Example</a></li>
-                                                                            <li class=""><a href="https://spoken-tutorial.org/creation/collaborate/">Collaborate with Us</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div></li>
-                                                    </div>
-                                                </ul>
-                                            </li>
-                                            
+    <link
+      rel="stylesheet"
+      href="{% static 'integration_static/20998b398b8b.css' %}"
+      type="text/css"
+    />
 
-                                            
-                                            
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">News <b class="caret"></b></a>
-                                                <ul class="dropdown-menu creation">
-                                                 
-                                                 
-                                                  <li><a href="https://spoken-tutorial.org/testimonials/">Testimonials</a></li>
-                                                  
-                                                  
-                                                  <li class="divider"></li>
-                                                  
-                                                  <li><a href="https://spoken-tutorial.org/news/articles-on-spoken-tutorial-project">Articles on Spoken Tutorial project</a></li>
-                                                  
-                                                  
-                                                  <li class="divider"></li>
-                                                  
-                                                  <li><a href="https://spoken-tutorial.org/news/news-and-events">Events &amp; Happenings</a></li>
-                                                  
-                                                  
-                                                  <li class="divider"></li>
-                                                  
-                                                  <li><a href="https://spoken-tutorial.org/research-popular-articles/">Research / Popular Articles</a></li>
-                                                  
-                                              </ul>
-                                          </li>
-                                          
-                                          
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-                                          
-                                          
-                                          <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">Academics <b class="caret"></b></a>
-                                            <ul class="dropdown-menu creation">
-                                             
-                                             
-                                              <li><a href="https://spoken-tutorial.org/news/moocs-acceptance/">MOOCs acceptance</a></li>
-                                              
-                                              
-                                              <li class="divider"></li>
-                                              
-                                              <li><a href="https://spoken-tutorial.org/news/official-letters-and-links/">Official Letters and Links</a></li>
-                                              
-                                              
-                                              <li class="divider"></li>
-                                              
-                                              <li><a href="https://spoken-tutorial.org/news/articles-on-university-tie-ups-workshops">Articles on University tie-ups/workshops</a></li>
-                                              
-                                          </ul>
-                                      </li>
-                                      
-                                      
+    <style type="text/css">
+      .fancybox-margin {
+        margin-right: 15px;
+      }
+    </style>
+    <style>
+      .gc-bubbleDefault {
+        background-color: transparent !important;
+        text-align: left;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+        table-layout: auto !important;
+      }
+      .gc-reset {
+        background-color: transparent !important;
+        border: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: left;
+      }
+      .pls-bubbleTop {
+        border-bottom: 1px solid #ccc !important;
+      }
+      .pls-contentLeft,
+      .pls-topTail,
+      .pls-vertShimLeft {
+        background-image: url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important;
+      }
+      .pls-topTail {
+        background-repeat: repeat-x !important;
+        background-position: bottom !important;
+      }
+      .pls-vertShim {
+        background-color: #fff !important;
+        text-align: right;
+      }
+      .tbl-grey .pls-vertShim {
+        background-color: #f5f5f5 !important;
+      }
+      .pls-vertShimLeft {
+        background-repeat: repeat-y !important;
+        background-position: 100% !important;
+        height: 4px;
+      }
+      .pls-vertShimRight {
+        height: 4px;
+      }
+      .pls-confirm-container .pls-vertShim {
+        background-color: #fff3c2 !important;
+      }
+      .pls-contentWrap {
+        background-color: #fff !important;
+        position: relative !important;
+        vertical-align: top;
+      }
+      .pls-contentLeft {
+        background-repeat: repeat-y;
+        background-position: 100%;
+        vertical-align: top;
+      }
+      .pls-dropRight {
+        background-image: url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;
+        background-repeat: repeat-y !important;
+        vertical-align: top;
+      }
+      .pls-dropBL,
+      .pls-dropTR .pls-dropBR,
+      .pls-tailleft,
+      .pls-vert,
+      .pls-vert img {
+        vertical-align: top;
+      }
+      .pls-dropBottom {
+        background-image: url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;
+        background-repeat: repeat-x !important;
+        width: 100%;
+        vertical-align: top;
+      }
+      .pls-topLeft {
+        background: inherit !important;
+        text-align: right;
+        vertical-align: bottom;
+      }
+      .pls-topRight {
+        background: inherit !important;
+        text-align: left;
+        vertical-align: bottom;
+      }
+      .pls-bottomLeft {
+        background: inherit !important;
+        text-align: right;
+      }
+      .pls-bottomRight {
+        background: inherit !important;
+        text-align: left;
+        vertical-align: top;
+      }
+      .pls-tailbottom,
+      .pls-tailleft,
+      .pls-tailright,
+      .pls-tailtop {
+        display: none;
+        position: relative;
+      }
+      .pls-dropBL,
+      .pls-dropBR,
+      .pls-dropTR,
+      .pls-tailbottom,
+      .pls-tailleft,
+      .pls-tailright,
+      .pls-tailtop {
+        background-image: url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;
+        background-repeat: no-repeat;
+      }
+      .tbl-grey .pls-dropBL,
+      .tbl-grey .pls-dropBR,
+      .tbl-grey .pls-dropTR,
+      .tbl-grey .pls-tailbottom,
+      .tbl-grey .pls-tailleft,
+      .tbl-grey .pls-tailright,
+      .tbl-grey .pls-tailtop {
+        background-image: url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important;
+      }
+      .pls-tailbottom {
+        background-position: -23px 0;
+      }
+      .pls-confirm-container .pls-tailbottom {
+        background-position: -23px -10px;
+      }
+      .pls-tailtop {
+        background-position: -19px -20px;
+      }
+      .pls-tailright {
+        background-position: 0 0;
+      }
+      .pls-tailleft {
+        background-position: -10px 0;
+      }
+      .pls-tailtop {
+        vertical-align: top;
+      }
+      .gc-bubbleDefault td {
+        line-height: 0;
+        font-size: 0;
+      }
+      .pls-tailbottom,
+      .pls-topLeft img,
+      .pls-topRight img {
+        vertical-align: bottom;
+      }
+      .bubbleDropTR,
+      .pls-bottomLeft,
+      .pls-bottomLeft img,
+      .pls-dropBottom img,
+      .pls-dropBottomL img,
+      .pls-dropBottomR img {
+        vertical-align: top;
+      }
+      .pls-dropTR {
+        background-position: 0 -22px;
+      }
+      .pls-dropBR {
+        background-position: 0 -27px;
+      }
+      .pls-dropBL {
+        background-position: 0 -16px;
+      }
+      .pls-spacerbottom,
+      .pls-spacerleft,
+      .pls-spacerright,
+      .pls-spacertop {
+        position: static !important;
+      }
+      .pls-spinner {
+        bottom: 0;
+        position: absolute;
+        left: 0;
+        margin: auto;
+        right: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div id="slideshow"></div>
 
-                                      
-                                      
-                                      <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">About <b class="caret"></b></a>
-                                        <ul class="dropdown-menu creation">
-                                         
-                                         
-                                          <li><a href="https://spoken-tutorial.org/about-us/">About Us</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/team/Creation-Team/">Team</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/mission/">Mission</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/creation/view_brochure">Brochures</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/stinternship2022/" target="_blank">FOSSEE Semester-long Internship 2022</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/series_tutorial-search/?search_otherfoss=Health+and+Nutrition&amp;search_otherlanguage=English" target="_blank">Health and Nutrition page</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/archived/" target="_blank">Archived FOSS</a></li>
-                                          
-                                          
-                                          <li class="divider"></li>
-                                          
-                                          <li><a href="https://spoken-tutorial.org/project_documents/" target="_blank">Project Documents</a></li>
-                                          
-                                      </ul>
-                                  </li>
-                                  
-                                  
+    <div id="page-wrapper">
+      <a
+        href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#page-wrapper"
+      ></a>
+      <!-- header begin -->
+      <div id="header-wrapper">
+        <nav class="navbar yamm navbar-default" role="navigation">
+          <div id="header-inner">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button
+                  type="button"
+                  class="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target="#main-nav"
+                >
+                  <span class="sr-only">Toggle Navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a href="https://spoken-tutorial.org/">
+                  <img
+                    src="{% static 'integration_static/logo.png"
+                    alt="Spoken-Tutorial logo"
+                  />
+                  Spoken <span class="title">Tutorial</span>
+                </a>
+              </div>
 
-                                  
-                                  
-                                  <li>
-                                   <a href="http://forums.spoken-tutorial.org/" target="_blank">Forums</a>
-                               </li>
-                               
-                               
-
-                               
-                               
-                               <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#">Statistics <b class="caret"></b></a>
-                                <ul class="dropdown-menu creation">
-                                 
-                                 
-                                  <li><a href="https://spoken-tutorial.org/statistics/training/">Training</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/pmmmnmtt/fdp/">FDP Training</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/tutorial-content/">Creation Content</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/online-test/">Online-Test</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/academic-center/">Academic Center</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/">India Map</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/motion-chart/">Motion Charts</a></li>
-                                  
-                                  
-                                  <li class="divider"></li>
-                                  
-                                  <li><a href="https://spoken-tutorial.org/statistics/ilw/">ILW Training</a></li>
-                                  
-                              </ul>
-                          </li>
-                          
-                          
-
-
-                      </ul>
-                      
-                      <ul class="nav navbar-nav navbar-right">
-                        
-                        
-                        <li class="dropdown">
-                            <a href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span title="" data-original-title="" class="glyphicon glyphicon-user"></span> SamAddy <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu user-details">
-                                <li><a href="https://spoken-tutorial.org/accounts/change-password/">Change Password</a></li>
-                                <li class="divider"></li>
-                                <li><a href="https://spoken-tutorial.org/accounts/profile/SamAddy/">Edit Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="https://spoken-tutorial.org/accounts/view-profile/SamAddy/">View Profile</a></li>
-                                <li class="divider"></li>
-                                
-                                
-                                <li><a href="https://spoken-tutorial.org/masquerade/">Masquerade</a></li>
-                                
-                                <li class="divider"></li>
-                                
-                                <li><a href="https://spoken-tutorial.org/accounts/logout/">Log Out</a></li>
-                            </ul>
-                        </li>
-                        
-                        
-                    </ul>
-                </div>
-            </div> <!-- /.container-fluid -->
-        </div> <!-- /#header-inner -->
-    </nav>
-</div> <!-- /#header-wrapper -->
-
-
-
-
-
-
-<!-- header end -->
-<div id="content-wrapper">
-    <div id="content-inner" class="container">
-        
-        <div id="content-block" class="col-lg-12 col-md-12 col-sm-12">
-
-
-            
-            <div id="content" class="col-lg-12 col-md-12 col-sm-12">
-                
-                
-                <h1 class="page-title">Command line arguments in C - English</h1>
-                
-                
-                
-                
-                <div class="actual-data">
-                    
-                    <row>
-                        <div class="container playlist-container col-lg-12 col-md-12 col-sm-12">
-                            <div class="video-container col-lg-8 col-md-8 col-sm-8">
-                                <div id="st_video" class="video-js vjs-default-skin vjs-paused vjs-controls-enabled vjs-user-inactive"><video id="st_video_html5_api" class="vjs-tech" preload="none" poster="/media/videos/61/605/Command-line-arguments-in-C-Big.png" data-setup="{}" src="/media/videos/61/605/Command-line-arguments-in-C-English.ogv">
-                                    <!-- <source src="/static/spoken/images/Overview-and-Installation-of-Git-English.ogv" type="video/ogg" /> -->
-                                    <source src="/media/videos/61/605/Command-line-arguments-in-C-English.ogv" type="video/ogg">
-                                     
-                                     
-                                     <source src="/media/videos/61/605/Command-line-arguments-in-C-English.mp4" type="video/mp4">
-                                         
-                                         
-                                        
-                                     </video><div></div><div class="vjs-poster" tabindex="-1" style="background-image: url(&quot;/media/videos/61/605/Command-line-arguments-in-C-Big.png&quot;);"></div><div class="vjs-text-track-display"></div><div class="vjs-loading-spinner"></div><div class="vjs-big-play-button" role="button" aria-live="polite" tabindex="0" aria-label="play video"><span aria-hidden="true"></span></div><div class="vjs-control-bar"><div class="vjs-play-control vjs-control " role="button" aria-live="polite" tabindex="0"><div class="vjs-control-content"><span class="vjs-control-text">Play</span></div></div><div class="vjs-current-time vjs-time-controls vjs-control"><div class="vjs-current-time-display" aria-live="off"><span class="vjs-control-text">Current Time </span>0:00</div></div><div class="vjs-time-divider"><div><span>/</span></div></div><div class="vjs-duration vjs-time-controls vjs-control"><div class="vjs-duration-display" aria-live="off"><span class="vjs-control-text">Duration Time </span>0:00</div></div><div class="vjs-remaining-time vjs-time-controls vjs-control"><div class="vjs-remaining-time-display" aria-live="off"><span class="vjs-control-text">Remaining Time </span>-0:00</div></div><div class="vjs-progress-control vjs-control"><div role="slider" aria-valuenow="NaN" aria-valuemin="0" aria-valuemax="100" tabindex="0" class="vjs-progress-holder vjs-slider" aria-label="video progress bar" aria-valuetext="0:00"><div class="vjs-load-progress"><span class="vjs-control-text">Loaded: 0%</span></div><div class="vjs-play-progress" style="width: 0%;"><span class="vjs-control-text">Progress: 0%</span></div><div class="vjs-seek-handle vjs-slider-handle" aria-live="off" style="left: 0%;"><span class="vjs-control-text">0:00</span></div></div></div><div class="vjs-fullscreen-control vjs-control " role="button" aria-live="polite" tabindex="0"><div class="vjs-control-content"><span class="vjs-control-text">Fullscreen</span></div></div><div class="vjs-volume-control vjs-control"><div role="slider" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" tabindex="0" class="vjs-volume-bar vjs-slider" aria-label="volume level" aria-valuetext="100%"><div class="vjs-volume-level" style="width: 100%;"><span class="vjs-control-text"></span></div><div class="vjs-volume-handle vjs-slider-handle" style="left: 100%;"><span class="vjs-control-text">00:00</span></div></div></div><div class="vjs-mute-control vjs-control" role="button" aria-live="polite" tabindex="0"><div><span class="vjs-control-text">Mute</span></div></div><div class="vjs-subtitles-button vjs-menu-button vjs-control " role="button" aria-live="polite" tabindex="0" aria-haspopup="true" aria-label="Subtitles Menu" style="display: none;"><div class="vjs-control-content"><span class="vjs-control-text">Subtitles</span></div><div class="vjs-menu"><ul class="vjs-menu-content"><li class="vjs-menu-item vjs-selected" role="button" aria-live="polite" tabindex="0" aria-selected="true">subtitles off</li></ul></div></div><div class="vjs-captions-button vjs-menu-button vjs-control " role="button" aria-live="polite" tabindex="0" aria-haspopup="true" aria-label="Captions Menu"><div class="vjs-control-content"><span class="vjs-control-text">Captions</span></div><div class="vjs-menu"><ul class="vjs-menu-content"><li class="vjs-menu-item vjs-selected" role="button" aria-live="polite" tabindex="0" aria-selected="true">captions off</li><li class="vjs-menu-item" role="button" aria-live="polite" tabindex="0" aria-selected="false">English</li></ul></div></div><div class="vjs-chapters-button vjs-menu-button vjs-control " role="button" aria-live="polite" tabindex="0" aria-haspopup="true" aria-label="Chapters Menu" style="display: none;"><div class="vjs-control-content"><span class="vjs-control-text">Chapters</span></div><div class="vjs-menu"><ul class="vjs-menu-content"></ul><li class="vjs-menu-title">Chapters</li></div></div></div></div>
-                                 </div>
-
-
-                                 <div class="container">
-
-                                    <div id="content">
-                                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                         
-                                            <li style="width:190px" class="active"><a href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#forums" data-toggle="tab">Questions posted on Forums</a></li>
-                                            <li style="width:180px;"><a style="min-height: 60px;padding-top: 12px;" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#tutorials" data-toggle="tab">Advance C Tutorials - English </a></li>
-                                            <div id="my-tab-content" class="tab-content">
-
-                                                <div class="tab-pane active" id="forums">
-                                                    <div id="forums_Q" class="ScrollStyle" style="width: 32%; ">
-                                                     
-                                                      
-                                                        <h4 style="font-family: Menlo;font-size: 16px; padding-left: 8px; ">Questions posted on ST Forums: </h4>
-                                                        <ul class="forum-questions" id="forum_Q" style="padding : 6px "><li class="question" id="373" style="background-color: rgb(205, 205, 205);">
-                                                            <a href="https://forums.spoken-tutorial.org/question/373/Doubt" target="_blank" class="373">Doubt</a>
-                                                            <p>I just wanted to ask &nbsp;wether same commands which we are using on ubuntu gcc compiler are valid on windows compiler or we have to make some alteration in codingg style
-                                                            </p><div class="timing pull-left">
-                                                                <small class="timing">0-1M</small>
-                                                                <small class="timing">0-10S</small>
-                                                            </div>
-                                                            <div class="user pull-right">
-                                                                <span>July 18, 2022, 1:17 p.m.</span>
-                                                                
-                                                                <small>arun10797</small>
-                                                                
-                                                            </div>
-                                                            <p></p>
-                                                            <hr class="hline-inner" style="margin-top: 18px;margin-bottom: 4px;">
-                                                        </li>
-                                                        
-                                                        
-
-                                                        <li class="question" id="4099" style="background-color: rgb(255, 255, 255);">
-                                                            <a href="https://forums.spoken-tutorial.org/question/4099/About-C-language-during--C-Program" target="_blank" class="4099">About C language during  C Program</a>
-                                                            <p>Where loop and argument should be start up within the program taken. After argument should be used loop completed.
-                                                            </p><div class="timing pull-left">
-                                                                <small class="timing">01-02M</small>
-                                                                <small class="timing">10-20S</small>
-                                                            </div>
-                                                            <div class="user pull-right">
-                                                                <span>July 18, 2022, 11:07 a.m.</span>
-                                                                
-                                                                <small>atishroy.atish@gmail.com</small>
-                                                                
-                                                            </div>
-                                                            <p></p>
-                                                            <hr class="hline-inner" style="margin-top: 18px;margin-bottom: 4px;">
-                                                        </li>
-                                                        
-                                                        
-
-                                                        <li class="question" id="1979" style="background-color: rgb(255, 255, 255);">
-                                                            <a href="https://forums.spoken-tutorial.org/question/1979/Command-line-arguments-program" target="_blank" class="1979">Command line arguments program</a>
-                                                            <p>What does argc and argv indicate in command-line arguments?
-                                                            </p><div class="timing pull-left">
-                                                                <small class="timing">02-03M</small>
-                                                                <small class="timing">10-20S</small>
-                                                            </div>
-                                                            <div class="user pull-right">
-                                                                <span>July 18, 2022, 11:19 a.m.</span>
-                                                                
-                                                                <small>yerrapavankalyan002@gmail.com</small>
-                                                                
-                                                            </div>
-                                                            <p></p>
-                                                            <hr class="hline-inner" style="margin-top: 18px;margin-bottom: 4px;">
-                                                        </li>
-                                                        
-                                                        
-
-                                                        
-                                                        
-                                                        
-                                                    </ul>
-                                                    
-                                                </div>
-
-                                            </div>
-                                            
-                                            <div class="tab-pane " id="tutorials">
-                                                <div class="playlist col-lg-4 col-md-4 col-sm-4" style="width: 32%">
-                                                   
-                                                    <div class="playlist-controls">
-                                                        <span class="backward"><i class="fa fa-1 fa-fast-backward"></i></span>
-                                                        <span class=" video-count pull-right" style="color: #ffffff;">1/3</span>
-                                                        <span class="forward"><a href="https://spoken-tutorial.org/watch/Advance+C/Union+and+Typedef/English/"><i class="fa fa-1 fa-fast-forward"></i></a></span>
-                                                    </div>
-                                                    <ul>
-                                                        
-                                                        <li class="playlist-item active" data="1">
-                                                            <a href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/">
-                                                                <div class="pull-left thumb">
-                                                                    <span class="order"><i class="fa fa-play"></i></span>
-                                                                    <img alt="Command line arguments in C - thumb" src="{% static 'integration_static/Command-line-arguments-in-C-Small.png" width="70">
-                                                                </div>
-                                                                <div class="description">
-                                                                    Command line arguments in C
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        
-                                                        <li class="playlist-item">
-                                                            <a href="https://spoken-tutorial.org/watch/Advance+C/Union+and+Typedef/English/">
-                                                                <div class="pull-left thumb">
-                                                                    <span class="order">2</span>
-                                                                    <img alt="Union and Typedef - thumb" src="{% static 'integration_static/Union-and-Typedef-Small.png" width="70">
-                                                                </div>
-                                                                <div class="description">
-                                                                    Union and Typedef
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        
-                                                        <li class="playlist-item">
-                                                            <a href="https://spoken-tutorial.org/watch/Advance+C/Storage+class+specifiers/English/">
-                                                                <div class="pull-left thumb">
-                                                                    <span class="order">3</span>
-                                                                    <img alt="Storage class specifiers - thumb" src="{% static 'integration_static/Storage-class-specifiers-Small.png" width="70">
-                                                                </div>
-                                                                <div class="description">
-                                                                    Storage class specifiers
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            
-
-                                        </div>
-                                    </ul></div>
-                                    
-
-                                    <script src="{% static 'integration_static/cb=gapi.loaded_2" async=""></script><script src="{% static 'integration_static/iframe_api"></script><script async="" src="{% static 'integration_static/analytics.js"></script><script type="text/javascript" id="www-widgetapi-script" src="{% static 'integration_static/www-widgetapi.js" async=""></script><script src="{% static 'integration_static/cb=gapi.loaded_1" async=""></script><script src="{% static 'integration_static/cb=gapi(1).loaded_0" async=""></script><script type="text/javascript">
-                                        jQuery(document).ready(function ($) {
-                                           $("#tabs").tab();
-                                       });
-                                   </script> 
-                               </div> <!-- container -->
-
-                           </div>
-                       </row>
-                       
-                       <row>
-                        <div class="inner-content-body col-lg-8 col-md-8 col-sm-8 no-padding">
-                            <div class="inner-shadow">
-                                <div class="row video-share">
-                                    <div class="ysubscribe pull-left col-lg-9 col-md-9 col-sm-9">
-                                        <div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 206px; height: 48px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 206px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1658157667035" name="I0_1658157667035" src="{% static 'integration_static/subscribe_embed.html" data-gapiattached="true"></iframe></div>
-                                    </div>
-                                    <p class="video-visits pull-right col-lg-3 col-md-3 col-sm-3">42761 visits</p>
+              <div class="collapse navbar-collapse" id="main-nav">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >Software Training <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu events">
+                      <div class="yamm-content">
+                        <li>
+                          <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                              <div
+                                class="col-sm-3 col-md-3 col-lg-3 column first mseprator"
+                              >
+                                <h5 class="media-heading">
+                                  <b>Software Training</b>
+                                </h5>
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#About_SELF_Workshops"
+                                        target="_blank"
+                                        >About the Training</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#Progress_To_Date"
+                                        target="_blank"
+                                        >Progress to Date</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#Software_Offered"
+                                        target="_blank"
+                                        >Software Offered</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#Contacts_For_Training"
+                                        target="_blank"
+                                        >Contacts for Training</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/change-in-policy/"
+                                        target="_blank"
+                                        >Change in Training Policy</a
+                                      >
+                                    </li>
+                                  </ul>
                                 </div>
-                                <hr class="hline">
-                                <ol class="breadcrumb">
-                                    
-                                    
-                                    <li><a href="https://spoken-tutorial.org/media/videos/61/Advance-C-Instruction-Sheet-English.pdf" target="_blank">Instruction Sheet</a></li>
-                                    
-                                    
+                              </div>
+                              <div
+                                class="col-sm-3 col-md-3 col-lg-3 column second mseprator"
+                              >
+                                <h5 class="media-heading"><b>Procedures</b></h5>
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#Organising_Training"
+                                        target="_blank"
+                                        >Organising Training</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/index.php/Software-Training#Downloading_Spoken_Tutorials"
+                                        target="_blank"
+                                        >Instruction for Downloading
+                                        Tutorials</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/cdcontent/"
+                                        target="_blank"
+                                        >Create Your Own Disc Image</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/software-training/resource-center/"
+                                        >Resource Centers</a
+                                      >
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div
+                                class="col-sm-3 col-md-3 col-lg-3 column third mseprator"
+                              >
+                                <h5 class="media-heading"><b>Training</b></h5>
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/software-training/"
+                                        >Training &amp; Payment Dashboard</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/software-training/training-planner/"
+                                        >Semester Training Planner Summary
+                                        (STPS)</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/participant/login/"
+                                        >Student Dashboard</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <span
+                                        class="badge"
+                                        id="nav-fdp"
+                                        style="margin-right: 4px"
+                                        >new</span
+                                      ><span
+                                        class="text-muted"
+                                        style="font-size: 1rem"
+                                        >Individual Learning</span
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/training/list_events/ongoing/"
+                                        target="_blank"
+                                        >Individual Learning Workshop</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/training/verify-ilwtest-certificate/"
+                                        target="_blank"
+                                        >Verify ILW test certificate
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div
+                                class="col-sm-3 col-md-3 col-lg-3 column last"
+                              >
+                                <h5 class="media-heading">
+                                  <b>Online Test</b>
+                                </h5>
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/images/0/09/Instructions_for_Invigilator.pdf"
+                                        target="_blank"
+                                        >Instruction for Invigilator</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://process.spoken-tutorial.org/images/9/95/Test_Instruction_for_Participants.pdf"
+                                        target="_blank"
+                                        >Instruction for Participants</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/software-training/test/verify-test-certificate/"
+                                        target="_blank"
+                                        >Certificate Verification Link</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/accounts/verify/"
+                                        target="_blank"
+                                        >Email Verification Link</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <span
+                                        class="badge"
+                                        id="nav-fdp"
+                                        style="margin-right: 4px"
+                                        >new</span
+                                      ><a
+                                        href="https://jrs.spoken-tutorial.org/"
+                                        target="_blank"
+                                        >Job Recommendation</a
+                                      >
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </ul>
+                  </li>
+                  <!-- -->
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >Creation <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu creation">
+                      <div class="yamm-content">
+                        <li>
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <div
+                                class="col-sm-6 col-md-6 col-lg-6 column first mseprator"
+                              >
+                                <!-- <h5 class="media-heading"><b>Contributor</b></h5> -->
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        target="_blank"
+                                        href="https://files.spoken-tutorial.org/english-videos/"
+                                        >Video for Dubbing</a
+                                      >
+                                    </li>
 
-                                    
-                                    
-                                    <li><a href="https://spoken-tutorial.org/media/videos/61/Advance-C-Installation-Sheet-English.pdf" target="_blank">Installation Sheet</a></li>
-                                    
-                                    
-                                    <li><a href="https://spoken-tutorial.org/creation/report-missing-component/3451" class="fancybox fancybox.iframe"> Report Missing Component</a></li>
+                                    <li class="">
+                                      <a
+                                        target="_blank"
+                                        href="https://process.spoken-tutorial.org/index.php/Main_Page"
+                                        >Creation Process</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        target="_blank"
+                                        href="https://script.spoken-tutorial.org/index.php/Main_Page"
+                                        >Outline and Script</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/creation"
+                                        >Creation Dashboard</a
+                                      >
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div
+                                class="col-sm-6 col-md-6 col-lg-6 column second"
+                              >
+                                <!-- <h5 class="media-heading"><b>Indian Language</b></h5> -->
+                                <div class="media-body">
+                                  <ul class="media-list">
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/creation/suggest-a-topic/"
+                                        >Suggest a Topic</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/creation/suggest-an-example/"
+                                        >Suggest an Example</a
+                                      >
+                                    </li>
+                                    <li class="">
+                                      <a
+                                        href="https://spoken-tutorial.org/creation/collaborate/"
+                                        >Collaborate with Us</a
+                                      >
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </ul>
+                  </li>
 
-                                    <li><a id="text" target="_blank" href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/" class="forum-post">Post your Question on the Forum</a></li>
-         <!--<li><p id="playerHolder"></p></li> 
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >News <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu creation">
+                      <li>
+                        <a href="https://spoken-tutorial.org/testimonials/"
+                          >Testimonials</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/news/articles-on-spoken-tutorial-project"
+                          >Articles on Spoken Tutorial project</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/news/news-and-events"
+                          >Events &amp; Happenings</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/research-popular-articles/"
+                          >Research / Popular Articles</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >Academics <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu creation">
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/news/moocs-acceptance/"
+                          >MOOCs acceptance</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/news/official-letters-and-links/"
+                          >Official Letters and Links</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/news/articles-on-university-tie-ups-workshops"
+                          >Articles on University tie-ups/workshops</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >About <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu creation">
+                      <li>
+                        <a href="https://spoken-tutorial.org/about-us/"
+                          >About Us</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/team/Creation-Team/"
+                          >Team</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a href="https://spoken-tutorial.org/mission/"
+                          >Mission</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/creation/view_brochure"
+                          >Brochures</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/stinternship2022/"
+                          target="_blank"
+                          >FOSSEE Semester-long Internship 2022</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/series_tutorial-search/?search_otherfoss=Health+and+Nutrition&amp;search_otherlanguage=English"
+                          target="_blank"
+                          >Health and Nutrition page</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/archived/"
+                          target="_blank"
+                          >Archived FOSS</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/project_documents/"
+                          target="_blank"
+                          >Project Documents</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li>
+                    <a href="http://forums.spoken-tutorial.org/" target="_blank"
+                      >Forums</a
+                    >
+                  </li>
+
+                  <li class="dropdown">
+                    <a
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      >Statistics <b class="caret"></b
+                    ></a>
+                    <ul class="dropdown-menu creation">
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/training/"
+                          >Training</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/pmmmnmtt/fdp/"
+                          >FDP Training</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/tutorial-content/"
+                          >Creation Content</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/online-test/"
+                          >Online-Test</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/academic-center/"
+                          >Academic Center</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a href="https://spoken-tutorial.org/statistics/"
+                          >India Map</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/statistics/motion-chart/"
+                          >Motion Charts</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a href="https://spoken-tutorial.org/statistics/ilw/"
+                          >ILW Training</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a
+                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#"
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                    >
+                      <span
+                        title=""
+                        data-original-title=""
+                        class="glyphicon glyphicon-user"
+                      ></span>
+                      SamAddy <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu user-details">
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/accounts/change-password/"
+                          >Change Password</a
+                        >
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/accounts/profile/SamAddy/"
+                          >Edit Profile</a
+                        >
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <a
+                          href="https://spoken-tutorial.org/accounts/view-profile/SamAddy/"
+                          >View Profile</a
+                        >
+                      </li>
+                      <li class="divider"></li>
+
+                      <li>
+                        <a href="https://spoken-tutorial.org/masquerade/"
+                          >Masquerade</a
+                        >
+                      </li>
+
+                      <li class="divider"></li>
+
+                      <li>
+                        <a href="https://spoken-tutorial.org/accounts/logout/"
+                          >Log Out</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /.container-fluid -->
+          </div>
+          <!-- /#header-inner -->
+        </nav>
+      </div>
+      <!-- /#header-wrapper -->
+
+      <!-- header end -->
+      <div id="content-wrapper">
+        <div id="content-inner" class="container">
+          <div id="content-block" class="col-lg-12 col-md-12 col-sm-12">
+            <div id="content" class="col-lg-12 col-md-12 col-sm-12">
+              <h1 class="page-title">Command line arguments in C - English</h1>
+
+              <div class="actual-data">
+                <row>
+                  <div
+                    class="container playlist-container col-lg-12 col-md-12 col-sm-12"
+                  >
+                    <div class="video-container col-lg-8 col-md-8 col-sm-8">
+                      <div
+                        id="st_video"
+                        class="video-js vjs-default-skin vjs-paused vjs-controls-enabled vjs-user-inactive"
+                      >
+                        <video
+                          id="st_video_html5_api"
+                          class="vjs-tech"
+                          preload="none"
+                          poster="/media/videos/61/605/Command-line-arguments-in-C-Big.png"
+                          data-setup="{}"
+                          src="/media/videos/61/605/Command-line-arguments-in-C-English.ogv"
+                        >
+                          <!-- <source src="/static/spoken/images/Overview-and-Installation-of-Git-English.ogv" type="video/ogg" /> -->
+                          <source
+                            src="/media/videos/61/605/Command-line-arguments-in-C-English.ogv"
+                            type="video/ogg"
+                          />
+
+                          <source
+                            src="/media/videos/61/605/Command-line-arguments-in-C-English.mp4"
+                            type="video/mp4"
+                          />
+                        </video>
+                        <div></div>
+                        <div
+                          class="vjs-poster"
+                          tabindex="-1"
+                          style="
+                            background-image: url('/media/videos/61/605/Command-line-arguments-in-C-Big.png');
+                          "
+                        ></div>
+                        <div class="vjs-text-track-display"></div>
+                        <div class="vjs-loading-spinner"></div>
+                        <div
+                          class="vjs-big-play-button"
+                          role="button"
+                          aria-live="polite"
+                          tabindex="0"
+                          aria-label="play video"
+                        >
+                          <span aria-hidden="true"></span>
+                        </div>
+                        <div class="vjs-control-bar">
+                          <div
+                            class="vjs-play-control vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                          >
+                            <div class="vjs-control-content">
+                              <span class="vjs-control-text">Play</span>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-current-time vjs-time-controls vjs-control"
+                          >
+                            <div
+                              class="vjs-current-time-display"
+                              aria-live="off"
+                            >
+                              <span class="vjs-control-text">Current Time </span
+                              >0:00
+                            </div>
+                          </div>
+                          <div class="vjs-time-divider">
+                            <div><span>/</span></div>
+                          </div>
+                          <div
+                            class="vjs-duration vjs-time-controls vjs-control"
+                          >
+                            <div class="vjs-duration-display" aria-live="off">
+                              <span class="vjs-control-text"
+                                >Duration Time </span
+                              >0:00
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-remaining-time vjs-time-controls vjs-control"
+                          >
+                            <div
+                              class="vjs-remaining-time-display"
+                              aria-live="off"
+                            >
+                              <span class="vjs-control-text"
+                                >Remaining Time </span
+                              >-0:00
+                            </div>
+                          </div>
+                          <div class="vjs-progress-control vjs-control">
+                            <div
+                              role="slider"
+                              aria-valuenow="NaN"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                              tabindex="0"
+                              class="vjs-progress-holder vjs-slider"
+                              aria-label="video progress bar"
+                              aria-valuetext="0:00"
+                            >
+                              <div class="vjs-load-progress">
+                                <span class="vjs-control-text">Loaded: 0%</span>
+                              </div>
+                              <div class="vjs-play-progress" style="width: 0%">
+                                <span class="vjs-control-text"
+                                  >Progress: 0%</span
+                                >
+                              </div>
+                              <div
+                                class="vjs-seek-handle vjs-slider-handle"
+                                aria-live="off"
+                                style="left: 0%"
+                              >
+                                <span class="vjs-control-text">0:00</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-fullscreen-control vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                          >
+                            <div class="vjs-control-content">
+                              <span class="vjs-control-text">Fullscreen</span>
+                            </div>
+                          </div>
+                          <div class="vjs-volume-control vjs-control">
+                            <div
+                              role="slider"
+                              aria-valuenow="100"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                              tabindex="0"
+                              class="vjs-volume-bar vjs-slider"
+                              aria-label="volume level"
+                              aria-valuetext="100%"
+                            >
+                              <div class="vjs-volume-level" style="width: 100%">
+                                <span class="vjs-control-text"></span>
+                              </div>
+                              <div
+                                class="vjs-volume-handle vjs-slider-handle"
+                                style="left: 100%"
+                              >
+                                <span class="vjs-control-text">00:00</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-mute-control vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                          >
+                            <div>
+                              <span class="vjs-control-text">Mute</span>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-subtitles-button vjs-menu-button vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                            aria-haspopup="true"
+                            aria-label="Subtitles Menu"
+                            style="display: none"
+                          >
+                            <div class="vjs-control-content">
+                              <span class="vjs-control-text">Subtitles</span>
+                            </div>
+                            <div class="vjs-menu">
+                              <ul class="vjs-menu-content">
+                                <li
+                                  class="vjs-menu-item vjs-selected"
+                                  role="button"
+                                  aria-live="polite"
+                                  tabindex="0"
+                                  aria-selected="true"
+                                >
+                                  subtitles off
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-captions-button vjs-menu-button vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                            aria-haspopup="true"
+                            aria-label="Captions Menu"
+                          >
+                            <div class="vjs-control-content">
+                              <span class="vjs-control-text">Captions</span>
+                            </div>
+                            <div class="vjs-menu">
+                              <ul class="vjs-menu-content">
+                                <li
+                                  class="vjs-menu-item vjs-selected"
+                                  role="button"
+                                  aria-live="polite"
+                                  tabindex="0"
+                                  aria-selected="true"
+                                >
+                                  captions off
+                                </li>
+                                <li
+                                  class="vjs-menu-item"
+                                  role="button"
+                                  aria-live="polite"
+                                  tabindex="0"
+                                  aria-selected="false"
+                                >
+                                  English
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div
+                            class="vjs-chapters-button vjs-menu-button vjs-control"
+                            role="button"
+                            aria-live="polite"
+                            tabindex="0"
+                            aria-haspopup="true"
+                            aria-label="Chapters Menu"
+                            style="display: none"
+                          >
+                            <div class="vjs-control-content">
+                              <span class="vjs-control-text">Chapters</span>
+                            </div>
+                            <div class="vjs-menu">
+                              <ul class="vjs-menu-content"></ul>
+                              <li class="vjs-menu-title">Chapters</li>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                      <div id="content">
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                          <li style="width: 190px" class="active">
+                            <a
+                              href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#forums"
+                              data-toggle="tab"
+                              >Questions posted on Forums</a
+                            >
+                          </li>
+                          <li style="width: 180px">
+                            <a
+                              style="min-height: 60px; padding-top: 12px"
+                              href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/#tutorials"
+                              data-toggle="tab"
+                              >Advance C Tutorials - English
+                            </a>
+                          </li>
+                          <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="forums">
+                              <div
+                                id="forums_Q"
+                                class="ScrollStyle"
+                                style="width: 32%"
+                              >
+                                <h4
+                                  style="
+                                    font-family: Menlo;
+                                    font-size: 16px;
+                                    padding-left: 8px;
+                                  "
+                                >
+                                  Questions posted on ST Forums:
+                                </h4>
+                                <ul
+                                  class="forum-questions"
+                                  id="forum_Q"
+                                  style="padding: 6px"
+                                >
+                                  <li
+                                    class="question"
+                                    id="373"
+                                    style="background-color: rgb(205, 205, 205)"
+                                  >
+                                    <a
+                                      href="https://forums.spoken-tutorial.org/question/373/Doubt"
+                                      target="_blank"
+                                      class="373"
+                                      >Doubt</a
+                                    >
+                                    <p>
+                                      I just wanted to ask &nbsp;wether same
+                                      commands which we are using on ubuntu gcc
+                                      compiler are valid on windows compiler or
+                                      we have to make some alteration in codingg
+                                      style
+                                    </p>
+                                    <div class="timing pull-left">
+                                      <small class="timing">0-1M</small>
+                                      <small class="timing">0-10S</small>
+                                    </div>
+                                    <div class="user pull-right">
+                                      <span>July 18, 2022, 1:17 p.m.</span>
+
+                                      <small>arun10797</small>
+                                    </div>
+                                    <p></p>
+                                    <hr
+                                      class="hline-inner"
+                                      style="
+                                        margin-top: 18px;
+                                        margin-bottom: 4px;
+                                      "
+                                    />
+                                  </li>
+
+                                  <li
+                                    class="question"
+                                    id="4099"
+                                    style="background-color: rgb(255, 255, 255)"
+                                  >
+                                    <a
+                                      href="https://forums.spoken-tutorial.org/question/4099/About-C-language-during--C-Program"
+                                      target="_blank"
+                                      class="4099"
+                                      >About C language during C Program</a
+                                    >
+                                    <p>
+                                      Where loop and argument should be start up
+                                      within the program taken. After argument
+                                      should be used loop completed.
+                                    </p>
+                                    <div class="timing pull-left">
+                                      <small class="timing">01-02M</small>
+                                      <small class="timing">10-20S</small>
+                                    </div>
+                                    <div class="user pull-right">
+                                      <span>July 18, 2022, 11:07 a.m.</span>
+
+                                      <small>atishroy.atish@gmail.com</small>
+                                    </div>
+                                    <p></p>
+                                    <hr
+                                      class="hline-inner"
+                                      style="
+                                        margin-top: 18px;
+                                        margin-bottom: 4px;
+                                      "
+                                    />
+                                  </li>
+
+                                  <li
+                                    class="question"
+                                    id="1979"
+                                    style="background-color: rgb(255, 255, 255)"
+                                  >
+                                    <a
+                                      href="https://forums.spoken-tutorial.org/question/1979/Command-line-arguments-program"
+                                      target="_blank"
+                                      class="1979"
+                                      >Command line arguments program</a
+                                    >
+                                    <p>
+                                      What does argc and argv indicate in
+                                      command-line arguments?
+                                    </p>
+                                    <div class="timing pull-left">
+                                      <small class="timing">02-03M</small>
+                                      <small class="timing">10-20S</small>
+                                    </div>
+                                    <div class="user pull-right">
+                                      <span>July 18, 2022, 11:19 a.m.</span>
+
+                                      <small
+                                        >yerrapavankalyan002@gmail.com</small
+                                      >
+                                    </div>
+                                    <p></p>
+                                    <hr
+                                      class="hline-inner"
+                                      style="
+                                        margin-top: 18px;
+                                        margin-bottom: 4px;
+                                      "
+                                    />
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div class="tab-pane" id="tutorials">
+                              <div
+                                class="playlist col-lg-4 col-md-4 col-sm-4"
+                                style="width: 32%"
+                              >
+                                <div class="playlist-controls">
+                                  <span class="backward"
+                                    ><i class="fa fa-1 fa-fast-backward"></i
+                                  ></span>
+                                  <span
+                                    class="video-count pull-right"
+                                    style="color: #ffffff"
+                                    >1/3</span
+                                  >
+                                  <span class="forward"
+                                    ><a
+                                      href="https://spoken-tutorial.org/watch/Advance+C/Union+and+Typedef/English/"
+                                      ><i
+                                        class="fa fa-1 fa-fast-forward"
+                                      ></i></a
+                                  ></span>
+                                </div>
+                                <ul>
+                                  <li class="playlist-item active" data="1">
+                                    <a
+                                      href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/"
+                                    >
+                                      <div class="pull-left thumb">
+                                        <span class="order"
+                                          ><i class="fa fa-play"></i
+                                        ></span>
+                                        <img
+                                          alt="Command line arguments in C - thumb"
+                                          src="{% static 'integration_static/Command-line-arguments-in-C-Small.png"
+                                          width="70"
+                                        />
+                                      </div>
+                                      <div class="description">
+                                        Command line arguments in C
+                                      </div>
+                                    </a>
+                                  </li>
+
+                                  <li class="playlist-item">
+                                    <a
+                                      href="https://spoken-tutorial.org/watch/Advance+C/Union+and+Typedef/English/"
+                                    >
+                                      <div class="pull-left thumb">
+                                        <span class="order">2</span>
+                                        <img
+                                          alt="Union and Typedef - thumb"
+                                          src="{% static 'integration_static/Union-and-Typedef-Small.png"
+                                          width="70"
+                                        />
+                                      </div>
+                                      <div class="description">
+                                        Union and Typedef
+                                      </div>
+                                    </a>
+                                  </li>
+
+                                  <li class="playlist-item">
+                                    <a
+                                      href="https://spoken-tutorial.org/watch/Advance+C/Storage+class+specifiers/English/"
+                                    >
+                                      <div class="pull-left thumb">
+                                        <span class="order">3</span>
+                                        <img
+                                          alt="Storage class specifiers - thumb"
+                                          src="{% static 'integration_static/Storage-class-specifiers-Small.png"
+                                          width="70"
+                                        />
+                                      </div>
+                                      <div class="description">
+                                        Storage class specifiers
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </ul>
+                      </div>
+
+                      <script
+                        src="{% static 'integration_static/cb=gapi.loaded_2"
+                        async=""
+                      ></script>
+                      <script src="{% static 'integration_static/iframe_api"></script>
+                      <script
+                        async=""
+                        src="{% static 'integration_static/analytics.js"
+                      ></script>
+                      <script
+                        type="text/javascript"
+                        id="www-widgetapi-script"
+                        src="{% static 'integration_static/www-widgetapi.js"
+                        async=""
+                      ></script>
+                      <script
+                        src="{% static 'integration_static/cb=gapi.loaded_1"
+                        async=""
+                      ></script>
+                      <script
+                        src="{% static 'integration_static/cb=gapi(1).loaded_0"
+                        async=""
+                      ></script>
+                      <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                          $("#tabs").tab();
+                        });
+                      </script>
+                    </div>
+                    <!-- container -->
+                  </div>
+                </row>
+
+                <row>
+                  <div
+                    class="inner-content-body col-lg-8 col-md-8 col-sm-8 no-padding"
+                  >
+                    <div class="inner-shadow">
+                      <div class="row video-share">
+                        <div
+                          class="ysubscribe pull-left col-lg-9 col-md-9 col-sm-9"
+                        >
+                          <div
+                            id="___ytsubscribe_0"
+                            style="
+                              text-indent: 0px;
+                              margin: 0px;
+                              padding: 0px;
+                              background: transparent;
+                              border-style: none;
+                              float: none;
+                              line-height: normal;
+                              font-size: 1px;
+                              vertical-align: baseline;
+                              display: inline-block;
+                              width: 206px;
+                              height: 48px;
+                            "
+                          >
+                            <iframe
+                              ng-non-bindable=""
+                              frameborder="0"
+                              hspace="0"
+                              marginheight="0"
+                              marginwidth="0"
+                              scrolling="no"
+                              style="
+                                position: static;
+                                top: 0px;
+                                width: 206px;
+                                margin: 0px;
+                                border-style: none;
+                                left: 0px;
+                                visibility: visible;
+                                height: 48px;
+                              "
+                              tabindex="0"
+                              vspace="0"
+                              width="100%"
+                              id="I0_1658157667035"
+                              name="I0_1658157667035"
+                              src="{% static 'integration_static/subscribe_embed.html"
+                              data-gapiattached="true"
+                            ></iframe>
+                          </div>
+                        </div>
+                        <p
+                          class="video-visits pull-right col-lg-3 col-md-3 col-sm-3"
+                        >
+                          42761 visits
+                        </p>
+                      </div>
+                      <hr class="hline" />
+                      <ol class="breadcrumb">
+                        <li>
+                          <a
+                            href="https://spoken-tutorial.org/media/videos/61/Advance-C-Instruction-Sheet-English.pdf"
+                            target="_blank"
+                            >Instruction Sheet</a
+                          >
+                        </li>
+
+                        <li>
+                          <a
+                            href="https://spoken-tutorial.org/media/videos/61/Advance-C-Installation-Sheet-English.pdf"
+                            target="_blank"
+                            >Installation Sheet</a
+                          >
+                        </li>
+
+                        <li>
+                          <a
+                            href="https://spoken-tutorial.org/creation/report-missing-component/3451"
+                            class="fancybox fancybox.iframe"
+                          >
+                            Report Missing Component</a
+                          >
+                        </li>
+
+                        <li>
+                          <a
+                            id="text"
+                            target="_blank"
+                            href="https://spoken-tutorial.org/watch/Advance+C/Command+line+arguments+in+C/English/"
+                            class="forum-post"
+                            >Post your Question on the Forum</a
+                          >
+                        </li>
+                        <!--<li><p id="playerHolder"></p></li> 
              <li><p id="playerHolder1"></p></li> !-->
-
-         </ol>
-         <hr class="hline">
-         <pre class="custom-jumbotron"><h3><b>Outline:</b></h3><p>Command Line arguments in C
+                      </ol>
+                      <hr class="hline" />
+                      <pre
+                        class="custom-jumbotron"
+                      ><h3><b>Outline:</b></h3><p>Command Line arguments in C
             main function with arguments
             argc
             argv
         Header files</p></pre>
-        
+                    </div>
+                    <button
+                      class="my-button my-submit-button"
+                      onclick="generateMindMapWithURL()"
+                    >
+                      Generate Mind Map
+                    </button>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <h2>Mind Map</h2>
+                        </div>
+                        <div class="modal-body">
+                          <svg></svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 no-padding right-bar">
+                    <div class="inner-sidebar">
+                      <div class="video-info-show-more">
+                        <div class="video-info">
+                          <table class="table table-bordered table-hover">
+                            <tbody>
+                              <tr>
+                                <th>Width:</th>
+                                <td>816</td>
+                                <th>Height:</th>
+                                <td>688</td>
+                              </tr>
+                              <tr>
+                                <th>Duration:</th>
+                                <td>00:05:43</td>
+                                <th>Size:</th>
+                                <td>5 MB</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <p class="video-show-more no-record">Show video info</p>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <p class="panel-body-heading">
+                            <i class="fa fa-youtube-play fa-1"></i>
+                            Pre-requisite
+                          </p>
+                          <hr class="hline" />
 
-    </div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-4 no-padding right-bar">
-    <div class="inner-sidebar">
-        <div class="video-info-show-more">
-            <div class="video-info">
-                <table class="table table-bordered table-hover">
-                    <tbody><tr>
-                        <th>Width:</th><td>816</td>
-                        <th>Height:</th><td>688</td>
-                    </tr>
-                    <tr>
-                        <th>Duration:</th><td>00:05:43</td>
-                        <th>Size:</th><td>5 MB</td>
-                    </tr>
-                </tbody></table>
+                          <a
+                            href="https://spoken-tutorial.org/watch/C+and+Cpp/File+Handling+In+C/English/"
+                            ><img
+                              src="{% static 'integration_static/File-Handling-In-C-Small.png"
+                              width="70"
+                              style="padding-right: 10px"
+                            />
+                            File Handling In C</a
+                          >
+                        </div>
+                      </div>
+                      <div class="list-group">
+                        <div class="list-group-item-container">
+                          <a
+                            href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Assignment.txt"
+                            target="_blank"
+                            class="list-group-item"
+                          >
+                            <h4 class="list-group-item-heading">
+                              <i class="fa fa-1 fa-file-text"></i>&nbsp;
+                              Assignment
+                            </h4>
+                          </a>
+                        </div>
+
+                        <div class="list-group-item-container">
+                          <a
+                            href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Codefiles.zip"
+                            target="_blank"
+                            class="list-group-item"
+                          >
+                            <h4 class="list-group-item-heading">
+                              <i class="fa fa-1 fa-archive"></i> Code files
+                            </h4>
+
+                            <hr class="hline" />
+                            <ul class="list-zipfiles">
+                              <li>code-cmd/main-with-args.c</li>
+
+                              <li>code-cmd/</li>
+                            </ul>
+                          </a>
+                        </div>
+
+                        <div class="list-group-item-container">
+                          <a
+                            href="https://script.spoken-tutorial.org/index.php/Advance-C/C2/Command-line-arguments-in-C/English"
+                            target="_blank"
+                            class="list-group-item"
+                          >
+                            <h4 class="list-group-item-heading">
+                              <i class="fa fa-1 fa-link"></i> Script
+                            </h4>
+                          </a>
+                        </div>
+
+                        <div class="list-group-item-container">
+                          <a
+                            href="https://script.spoken-tutorial.org/index.php/Advance-C/C2/Command-line-arguments-in-C/English-timed"
+                            target="_blank"
+                            class="list-group-item timed-script"
+                          >
+                            <h4 class="list-group-item-heading">
+                              <i class="fa fa-1 fa-link"></i> Timed Script
+                            </h4>
+                          </a>
+                        </div>
+
+                        <div class="list-group-item-container">
+                          <a
+                            href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Slides.zip"
+                            target="_blank"
+                            class="list-group-item"
+                          >
+                            <h4 class="list-group-item-heading">
+                              <i class="fa fa-1 fa-archive"></i> Slides
+                            </h4>
+
+                            <hr class="hline" />
+                            <ul class="list-zipfiles">
+                              <li>slides/3t-logo.pdf</li>
+
+                              <li>slides/command-line-args.pdf</li>
+
+                              <li>slides/command-line-args.tex</li>
+
+                              <li>slides/</li>
+                            </ul>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </row>
+              </div>
             </div>
-            <p class="video-show-more no-record">Show video info</p>
+          </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <p class="panel-body-heading"><i class="fa fa-youtube-play fa-1"></i> Pre-requisite</p>
-                <hr class="hline">
-                
-                
-                
-                <a href="https://spoken-tutorial.org/watch/C+and+Cpp/File+Handling+In+C/English/"><img src="{% static 'integration_static/File-Handling-In-C-Small.png" width="70" style="padding-right: 10px;">
-                File Handling In C</a>
-                
-                
-                
-            </div>
-        </div>
-        <div class="list-group">
-            
-            <div class="list-group-item-container">
-                <a href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Assignment.txt" target="_blank" class="list-group-item">
-                    <h4 class="list-group-item-heading"><i class="fa fa-1 fa-file-text"></i>&nbsp; Assignment</h4>
-                </a>
-            </div>
-            
-            
-            <div class="list-group-item-container">
-                <a href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Codefiles.zip" target="_blank" class="list-group-item">
-                    <h4 class="list-group-item-heading"><i class="fa fa-1 fa-archive"></i> Code files</h4>
-                    
-                    
-                    
-                    <hr class="hline">
-                    <ul class="list-zipfiles">
-                        
-                        <li>code-cmd/main-with-args.c</li>
-                        
-                        <li>code-cmd/</li>
-                        
-                    </ul>
-                    
-                    
-                    
-                </a>
-            </div>
-            
-            
-            <div class="list-group-item-container">
-                <a href="https://script.spoken-tutorial.org/index.php/Advance-C/C2/Command-line-arguments-in-C/English" target="_blank" class="list-group-item">
-                    <h4 class="list-group-item-heading"><i class="fa fa-1 fa-link"></i> Script</h4>
-                </a>
-            </div>
-            
-            
-            
-            <div class="list-group-item-container">
-                <a href="https://script.spoken-tutorial.org/index.php/Advance-C/C2/Command-line-arguments-in-C/English-timed" target="_blank" class="list-group-item">
-                    <h4 class="list-group-item-heading"><i class="fa fa-1 fa-link"></i> Timed Script</h4>
-                </a>
-            </div>
-            
-            
-            
-            
-            
-            <div class="list-group-item-container">
-                <a href="https://spoken-tutorial.org/media/videos/61/605/resources/Command-line-arguments-in-C-Slides.zip" target="_blank" class="list-group-item">
-                    <h4 class="list-group-item-heading"><i class="fa fa-1 fa-archive"></i> Slides</h4>
-                    
-                    
-                    
-                    <hr class="hline">
-                    <ul class="list-zipfiles">
-                        
-                        <li>slides/3t-logo.pdf</li>
-                        
-                        <li>slides/command-line-args.pdf</li>
-                        
-                        <li>slides/command-line-args.tex</li>
-                        
-                        <li>slides/</li>
-                        
-                    </ul>
-                    
-                    
-                    
-                </a>
-            </div>
-            
-            
-        </div>
-    </div>
-</div>
-</row>
-</div>
-
-
-
-</div>
-</div>
-</div><!-- /#content-inner .container -->
-</div><!-- /#content-wrapper -->
-<div id="footer-wrapper">
-    <div class="container-inner sans-serif">
-        <div class="container">
+        <!-- /#content-inner .container -->
+      </div>
+      <!-- /#content-wrapper -->
+      <div id="footer-wrapper">
+        <div class="container-inner sans-serif">
+          <div class="container">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 footer-links">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ul class="list-unstyled">
-                        <li><a href="https://fossee.in/" target="_blank">FOSSEE Project</a></li>
-                        <li><a href="https://www.scilab.in/" target="_blank">Scilab</a></li>
-                        <li><a href="https://esim.fossee.in/" target="_blank">eSim (Oscad)</a></li>
-                        <li><a href="https://python.fossee.in/" target="_blank">Python</a></li>
-                        <li><a href="https://cfd.fossee.in/" target="_blank">OpenFoam (CFD)</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ul class="list-unstyled">
-                        <li><a href="https://aakashlabs.org/" target="_blank">Aakash Labs</a></li>
-                        <li><a href="https://www.co-learn.in/" target="_blank">Co-learn</a></li>
-                        <li><a href="https://www.sakshat.ac.in/" target="_blank">Education Mission</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ul class="list-unstyled">
-                        <li><a href="https://process.spoken-tutorial.org/index.php/Software-Training" target="_blank">Software Training</a></li>
-                        <li class=""><a href="https://process.spoken-tutorial.org/index.php/Software-Training#Contacts_For_Training" target="_blank">Contacts for Training</a></li>
-                        <li><a href="https://spoken-tutorial.org/software-training/">Training Dashboard</a></li>
-                        <li><a href="https://spoken-tutorial.org/creation/">Creation Dashboard</a></li>
-                        
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <ul class="list-unstyled">
-                        <li><a href="https://spoken-tutorial.org/about-us/">About Us</a></li>
-                        <li><a href="https://spoken-tutorial.org/news/article/">News</a></li>
-                        <!-- <li><a href="#" target="_blank">Partners</a></li> -->
-                        
-                        <li class="st-statcounter-seperator"></li>
-                        <li class="st-statcounter">
-                            <!-- Start of StatCounter Code for Default Guide --> 
-                            <script type="text/javascript"> 
-                                var sc_project=5528933; 
-                                var sc_invisible=1; 
-                                var sc_security="e5fd867b"; 
-                                var sc_https=1; 
-                                var scJsHost = (("https:" == document.location.protocol) ? 
-                                    "https://secure." : "http://www."); 
-                                document.write("<sc"+"ript type='text/javascript' async src='" + 
-                                    scJsHost+ 
-                                    "statcounter.com/counter/counter_xhtml.js'></"+"script>"); 
-                                </script><script type="text/javascript" async="" src="{% static 'integration_static/counter_xhtml.js"></script><span class="statcounter" id="sc_counter_5528933_2">105,350,036</span> 
-                                <noscript><div class='statcounter'><a class='statcounter' href='http://statcounter.com/free-web-stats/' title='web stats'><img alt='web stats' class='statcounter' src='http://c.statcounter.com/5528933/0/e5fd867b/1/'/></a></div></noscript> 
-                                <!-- End of StatCounter Code for Default Guide --> 
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://fossee.in/" target="_blank"
+                      >FOSSEE Project</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.scilab.in/" target="_blank">Scilab</a>
+                  </li>
+                  <li>
+                    <a href="https://esim.fossee.in/" target="_blank"
+                      >eSim (Oscad)</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://python.fossee.in/" target="_blank"
+                      >Python</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://cfd.fossee.in/" target="_blank"
+                      >OpenFoam (CFD)</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://aakashlabs.org/" target="_blank"
+                      >Aakash Labs</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.co-learn.in/" target="_blank"
+                      >Co-learn</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.sakshat.ac.in/" target="_blank"
+                      >Education Mission</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <ul class="list-unstyled">
+                  <li>
+                    <a
+                      href="https://process.spoken-tutorial.org/index.php/Software-Training"
+                      target="_blank"
+                      >Software Training</a
+                    >
+                  </li>
+                  <li class="">
+                    <a
+                      href="https://process.spoken-tutorial.org/index.php/Software-Training#Contacts_For_Training"
+                      target="_blank"
+                      >Contacts for Training</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://spoken-tutorial.org/software-training/"
+                      >Training Dashboard</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://spoken-tutorial.org/creation/"
+                      >Creation Dashboard</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="https://spoken-tutorial.org/about-us/">About Us</a>
+                  </li>
+                  <li>
+                    <a href="https://spoken-tutorial.org/news/article/">News</a>
+                  </li>
+                  <!-- <li><a href="#" target="_blank">Partners</a></li> -->
 
-                                <!-- ol code below-->
-                                <!-- Start of StatCounter Code for Default Guide -->
-                                <b>
-                                    <script type="text/javascript">
-                                        var sc_project=5528933;
-                                        var sc_invisible=0;
-                                        var sc_security="e5fd867b";
-                                        var sc_text=2;
-                                    </script>
-                                    <script type="text/javascript" src="{% static 'integration_static/counter.js"></script><span class="statcounter" id="sc_counter_5528933">105,350,035</span>
-                                    <noscript>
-                                        <div class="statcounter">
-                                            <a title="hits counter" href="https://statcounter.com/" target="_blank">
-                                                <img class="statcounter" src="https://c.statcounter.com/5528933/0/e5fd867b/0/" alt="hits counter">
-                                            </a>
-                                        </div>
-                                    </noscript>
-                                </b> page loads
-                                <!-- End of StatCounter Code for Default Guide -->
-                                <p><a href="https://statcounter.com/p5528933/?guest=1" target="_blank">Click here to view stats</a></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 footer-seperator"></div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 license fill iitb-logo">
-                    <div class="fill">
-                        <a href="http://www.iitb.ac.in/" target="_blank">
-                            <img width="110px" src="{% static 'integration_static/iitb-logo.png" alt="IITB Logo">
-                            <footer>
-                                Developed at IIT Bombay <br>
-                            </footer>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                 <p class="cc-data">
-                    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
-                        <img src="{% static 'integration_static/88x31.png" alt="CC logo">
-                    </a> Spoken Tutorial by <a href="http://www.iitb.ac.in/" target="_blank">IIT Bombay</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where stated otherwise <a data-toggle="tooltip" data-placement="top" title="Series which are not shared under CC BY SA but have a perpetual permission to display are: PHP &amp; MySQL, GIMP, Health Series."><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></a><br>Based on a work at <a xmlns:dct="https://purl.org/dc/terms/" href="https://spoken-tutorial.org/" rel="dct:source">https://spoken-tutorial.org</a>. Permissions beyond the scope of this license may be available at <a xmlns:cc="https://creativecommons.org/ns#" href="https://spoken-tutorial.org/" rel="cc:morePermissions">https://spoken-tutorial.org</a>.
-                </p>
+                  <li class="st-statcounter-seperator"></li>
+                  <li class="st-statcounter">
+                    <!-- Start of StatCounter Code for Default Guide -->
+                    <script type="text/javascript">
+                      var sc_project = 5528933;
+                      var sc_invisible = 1;
+                      var sc_security = "e5fd867b";
+                      var sc_https = 1;
+                      var scJsHost =
+                        "https:" == document.location.protocol
+                          ? "https://secure."
+                          : "http://www.";
+                      document.write(
+                        "<sc" +
+                          "ript type='text/javascript' async src='" +
+                          scJsHost +
+                          "statcounter.com/counter/counter_xhtml.js'></" +
+                          "script>"
+                      );
+                    </script>
+                    <script
+                      type="text/javascript"
+                      async=""
+                      src="{% static 'integration_static/counter_xhtml.js"
+                    ></script>
+                    <span class="statcounter" id="sc_counter_5528933_2"
+                      >105,350,036</span
+                    >
+                    <noscript
+                      ><div class="statcounter">
+                        <a
+                          class="statcounter"
+                          href="http://statcounter.com/free-web-stats/"
+                          title="web stats"
+                          ><img
+                            alt="web stats"
+                            class="statcounter"
+                            src="http://c.statcounter.com/5528933/0/e5fd867b/1/"
+                        /></a></div
+                    ></noscript>
+                    <!-- End of StatCounter Code for Default Guide -->
+
+                    <!-- ol code below-->
+                    <!-- Start of StatCounter Code for Default Guide -->
+                    <b>
+                      <script type="text/javascript">
+                        var sc_project = 5528933;
+                        var sc_invisible = 0;
+                        var sc_security = "e5fd867b";
+                        var sc_text = 2;
+                      </script>
+                      <script
+                        type="text/javascript"
+                        src="{% static 'integration_static/counter.js"
+                      ></script>
+                      <span class="statcounter" id="sc_counter_5528933"
+                        >105,350,035</span
+                      >
+                      <noscript>
+                        <div class="statcounter">
+                          <a
+                            title="hits counter"
+                            href="https://statcounter.com/"
+                            target="_blank"
+                          >
+                            <img
+                              class="statcounter"
+                              src="https://c.statcounter.com/5528933/0/e5fd867b/0/"
+                              alt="hits counter"
+                            />
+                          </a>
+                        </div>
+                      </noscript>
+                    </b>
+                    page loads
+                    <!-- End of StatCounter Code for Default Guide -->
+                    <p>
+                      <a
+                        href="https://statcounter.com/p5528933/?guest=1"
+                        target="_blank"
+                        >Click here to view stats</a
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div
+              class="col-lg-1 col-md-1 col-sm-1 col-xs-1 footer-seperator"
+            ></div>
+            <div
+              class="col-lg-3 col-md-3 col-sm-3 col-xs-3 license fill iitb-logo"
+            >
+              <div class="fill">
+                <a href="http://www.iitb.ac.in/" target="_blank">
+                  <img
+                    width="110px"
+                    src="{% static 'integration_static/iitb-logo.png"
+                    alt="IITB Logo"
+                  />
+                  <footer>Developed at IIT Bombay <br /></footer>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p class="cc-data">
+                <a
+                  rel="license"
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                >
+                  <img
+                    src="{% static 'integration_static/88x31.png"
+                    alt="CC logo"
+                  />
+                </a>
+                Spoken Tutorial by
+                <a href="http://www.iitb.ac.in/" target="_blank">IIT Bombay</a>
+                is licensed under a
+                <a
+                  rel="license"
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >, except where stated otherwise
+                <a
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Series which are not shared under CC BY SA but have a perpetual permission to display are: PHP &amp; MySQL, GIMP, Health Series."
+                  ><i
+                    class="fa fa-question-circle fa-lg"
+                    aria-hidden="true"
+                  ></i></a
+                ><br />Based on a work at
+                <a
+                  xmlns:dct="https://purl.org/dc/terms/"
+                  href="https://spoken-tutorial.org/"
+                  rel="dct:source"
+                  >https://spoken-tutorial.org</a
+                >. Permissions beyond the scope of this license may be available
+                at
+                <a
+                  xmlns:cc="https://creativecommons.org/ns#"
+                  href="https://spoken-tutorial.org/"
+                  rel="cc:morePermissions"
+                  >https://spoken-tutorial.org</a
+                >.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div><!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->
 
-
-        <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
             ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="{% static 'integration_static/jquery-1.11.0.min.js' %}"></script>
-            <script src="{% static 'integration_static/bootstrap.min.js' %}"></script>
-            
-            <script src="{% static 'integration_static/video.min.js' %}"></script>
-            <script src="{% static 'integration_static/jquery.fancybox.pack.js' %}"></script>
-            <script src="{% static 'integration_static/jquery.mousewheel-3.0.6.pack.js' %}"></script>
-            <script src="{% static 'integration_static/platform.js' %}" gapi_processed="true"></script>
-            <script type="text/javascript" src="{% static 'integration_static/iframe_api' %}"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'integration_static/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'integration_static/bootstrap.min.js' %}"></script>
 
-            <script type="text/javascript" src="{% static 'integration_static/fbf43a16d172.js' %}"></script>
-            
-            <script type="text/javascript" src="{% static 'integration_static/97c40be473b5.js' %}"></script>
-            
-            <script>
-                /* Slideshow */
-                var stop = 1
-                $('#slideshow').hover(function(){
-                    stop = 0
-                }, function(){
-                    stop = 1
-                });
-                if($(".announcement").length > 1){
-                    $("#slideshow > div:gt(0)").hide();
-                    setInterval(function() {
-                      if(stop){
-                          $('#slideshow > div:first')
-                          .fadeOut(0)
-                          .next()
-                          .fadeIn(0)
-                          .end()
-                          .appendTo('#slideshow');
-                      }
-                  },  5000);
-                }
-                $('.close').click(function(){
-                    $(".navbar-fixed-top").css({'top' : '0px', 'position' : 'fixed'});
-                    $("#header-wrapper").css({'height' : '0px'});
-                });
-            </script>
+    <script src="{% static 'integration_static/video.min.js' %}"></script>
+    <script src="{% static 'integration_static/jquery.fancybox.pack.js' %}"></script>
+    <script src="{% static 'integration_static/jquery.mousewheel-3.0.6.pack.js' %}"></script>
+    <script
+      src="{% static 'integration_static/platform.js' %}"
+      gapi_processed="true"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'integration_static/iframe_api' %}"
+    ></script>
 
-            
+    <script
+      type="text/javascript"
+      src="{% static 'integration_static/fbf43a16d172.js' %}"
+    ></script>
 
-            <iframe name="oauth2relay895957210" id="oauth2relay895957210" src="{% static 'integration_static/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><div style="display: block; visibility: hidden; position: absolute; width: 106px; left: -10000px; top: -10000px;"><table cellpadding="0" cellspacing="0" dir="ltr" style="width:106px;" frame="void" rules="none" class=" gc-bubbleDefault pls-container"><tbody><tr class="gc-reset"><td class="pls-topLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/border_3.gif"></td><td class="pls-topTail gc-reset"><img class="pls-tailbottom gc-reset" style="width:15px !important; height:9px !important; max-width: 15px !important; max-height: 9px !important;" src="{% static 'integration_static/spacer.gif"><img class="pls-spacerbottom gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/spacer.gif"></td><td class="pls-topRight gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/border_3.gif"></td></tr><tr class="gc-reset"><td class="pls-vertShimLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:4px !important; max-width: 1px !important; max-height: 4px !important;" src="{% static 'integration_static/spacer.gif"></td><td class="pls-vertShim gc-reset"><img class="gc-reset" style="width:1px !important; height:4px !important; max-width: 1px !important; max-height: 4px !important;" src="{% static 'integration_static/spacer.gif"></td><td class="pls-vertShimRight gc-reset"><img class="pls-dropTR gc-reset" style="width:5px !important; height:4px !important; max-width: 5px !important; max-height: 4px !important;" src="{% static 'integration_static/spacer.gif"></td></tr><tr class="gc-reset"><td class="pls-contentLeft gc-reset"><img class="pls-tailright gc-reset" style="width:9px !important; height:15px !important; max-width: 9px !important; max-height: 15px !important;" src="{% static 'integration_static/spacer.gif"><img class="pls-spacerright gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/spacer.gif"></td><td class="pls-contentWrap gc-reset"><div class="goog-bubble-content gc-reset"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="margin:0px;position:absolute;z-index:1;border-style:none;outline:none;width:100px;" tabindex="0" vspace="0" width="100%" id="I0_1658157668443" name="I0_1658157668443" src="{% static 'integration_static/subscribe_embed(1).html"></iframe></div></td><td class="pls-dropRight gc-reset"><img class="pls-tailleft gc-reset" style="width:12px !important; height:19px !important; max-width: 12px !important; max-height: 19px !important;" src="{% static 'integration_static/spacer.gif"><img class="pls-spacerleft gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/spacer.gif"></td></tr><tr class="gc-reset"><td class="pls-bottomLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/border_3.gif"></td><td class="gc-reset"><table cellpadding="0" cellspacing="0" style="width:100%" class="gc-reset"><tbody><tr class="gc-reset"><td class="pls-vert gc-reset"><img class="pls-dropBL gc-reset" style="width:4px !important; height:5px !important; max-width: 4px !important; max-height: 5px !important;" src="{% static 'integration_static/spacer.gif"></td><td class="pls-dropBottom gc-reset"><img class="pls-tailtop gc-reset" style="width:19px !important; height:13px !important; max-width: 19px !important; max-height: 13px !important;" src="{% static 'integration_static/spacer.gif"><img class="pls-spacertop gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="{% static 'integration_static/spacer.gif"></td></tr></tbody></table></td><td class="pls-vert gc-reset"><img class="pls-dropBR gc-reset" style="width:5px !important; height:5px !important; max-width: 5px !important; max-height: 5px !important;" src="{% static 'integration_static/spacer.gif"></td></tr></tbody></table></div></body></html>
+    <script
+      type="text/javascript"
+      src="{% static 'integration_static/97c40be473b5.js' %}"
+    ></script>
+
+    <script>
+      /* Slideshow */
+      var stop = 1;
+      $("#slideshow").hover(
+        function () {
+          stop = 0;
+        },
+        function () {
+          stop = 1;
+        }
+      );
+      if ($(".announcement").length > 1) {
+        $("#slideshow > div:gt(0)").hide();
+        setInterval(function () {
+          if (stop) {
+            $("#slideshow > div:first")
+              .fadeOut(0)
+              .next()
+              .fadeIn(0)
+              .end()
+              .appendTo("#slideshow");
+          }
+        }, 5000);
+      }
+      $(".close").click(function () {
+        $(".navbar-fixed-top").css({ top: "0px", position: "fixed" });
+        $("#header-wrapper").css({ height: "0px" });
+      });
+    </script>
+
+    <iframe
+      name="oauth2relay895957210"
+      id="oauth2relay895957210"
+      src="{% static 'integration_static/postmessageRelay.html"
+      tabindex="-1"
+      aria-hidden="true"
+      style="width: 1px; height: 1px; position: absolute; top: -100px"
+    ></iframe>
+    <div
+      style="
+        display: block;
+        visibility: hidden;
+        position: absolute;
+        width: 106px;
+        left: -10000px;
+        top: -10000px;
+      "
+    >
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        dir="ltr"
+        style="width: 106px"
+        frame="void"
+        rules="none"
+        class="gc-bubbleDefault pls-container"
+      >
+        <tbody>
+          <tr class="gc-reset">
+            <td class="pls-topLeft gc-reset">
+              <img
+                class="gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/border_3.gif"
+              />
+            </td>
+            <td class="pls-topTail gc-reset">
+              <img
+                class="pls-tailbottom gc-reset"
+                style="
+                  width: 15px !important;
+                  height: 9px !important;
+                  max-width: 15px !important;
+                  max-height: 9px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              /><img
+                class="pls-spacerbottom gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+            <td class="pls-topRight gc-reset">
+              <img
+                class="gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/border_3.gif"
+              />
+            </td>
+          </tr>
+          <tr class="gc-reset">
+            <td class="pls-vertShimLeft gc-reset">
+              <img
+                class="gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 4px !important;
+                  max-width: 1px !important;
+                  max-height: 4px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+            <td class="pls-vertShim gc-reset">
+              <img
+                class="gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 4px !important;
+                  max-width: 1px !important;
+                  max-height: 4px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+            <td class="pls-vertShimRight gc-reset">
+              <img
+                class="pls-dropTR gc-reset"
+                style="
+                  width: 5px !important;
+                  height: 4px !important;
+                  max-width: 5px !important;
+                  max-height: 4px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+          </tr>
+          <tr class="gc-reset">
+            <td class="pls-contentLeft gc-reset">
+              <img
+                class="pls-tailright gc-reset"
+                style="
+                  width: 9px !important;
+                  height: 15px !important;
+                  max-width: 9px !important;
+                  max-height: 15px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              /><img
+                class="pls-spacerright gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+            <td class="pls-contentWrap gc-reset">
+              <div class="goog-bubble-content gc-reset">
+                <iframe
+                  ng-non-bindable=""
+                  frameborder="0"
+                  hspace="0"
+                  marginheight="0"
+                  marginwidth="0"
+                  scrolling="no"
+                  style="
+                    margin: 0px;
+                    position: absolute;
+                    z-index: 1;
+                    border-style: none;
+                    outline: none;
+                    width: 100px;
+                  "
+                  tabindex="0"
+                  vspace="0"
+                  width="100%"
+                  id="I0_1658157668443"
+                  name="I0_1658157668443"
+                  src="{% static 'integration_static/subscribe_embed(1).html"
+                ></iframe>
+              </div>
+            </td>
+            <td class="pls-dropRight gc-reset">
+              <img
+                class="pls-tailleft gc-reset"
+                style="
+                  width: 12px !important;
+                  height: 19px !important;
+                  max-width: 12px !important;
+                  max-height: 19px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              /><img
+                class="pls-spacerleft gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+          </tr>
+          <tr class="gc-reset">
+            <td class="pls-bottomLeft gc-reset">
+              <img
+                class="gc-reset"
+                style="
+                  width: 1px !important;
+                  height: 1px !important;
+                  max-width: 1px !important;
+                  max-height: 1px !important;
+                "
+                src="{% static 'integration_static/border_3.gif"
+              />
+            </td>
+            <td class="gc-reset">
+              <table
+                cellpadding="0"
+                cellspacing="0"
+                style="width: 100%"
+                class="gc-reset"
+              >
+                <tbody>
+                  <tr class="gc-reset">
+                    <td class="pls-vert gc-reset">
+                      <img
+                        class="pls-dropBL gc-reset"
+                        style="
+                          width: 4px !important;
+                          height: 5px !important;
+                          max-width: 4px !important;
+                          max-height: 5px !important;
+                        "
+                        src="{% static 'integration_static/spacer.gif"
+                      />
+                    </td>
+                    <td class="pls-dropBottom gc-reset">
+                      <img
+                        class="pls-tailtop gc-reset"
+                        style="
+                          width: 19px !important;
+                          height: 13px !important;
+                          max-width: 19px !important;
+                          max-height: 13px !important;
+                        "
+                        src="{% static 'integration_static/spacer.gif"
+                      /><img
+                        class="pls-spacertop gc-reset"
+                        style="
+                          width: 1px !important;
+                          height: 1px !important;
+                          max-width: 1px !important;
+                          max-height: 1px !important;
+                        "
+                        src="{% static 'integration_static/spacer.gif"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td class="pls-vert gc-reset">
+              <img
+                class="pls-dropBR gc-reset"
+                style="
+                  width: 5px !important;
+                  height: 5px !important;
+                  max-width: 5px !important;
+                  max-height: 5px !important;
+                "
+                src="{% static 'integration_static/spacer.gif"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <script src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>

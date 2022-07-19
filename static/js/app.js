@@ -1,3 +1,10 @@
+var modal = document.querySelector("#myModal")
+var span = document.querySelector(".close");
+
+span.onclick = () => {
+  modal.style.display = "none";
+}
+
 const addInput = (event) => {
   const div = document.querySelector("#inputs");
   const text_input = getInput();
@@ -21,10 +28,21 @@ const generateMindMap = (event) => {
   getMindMap(event);
 };
 
-const getMindMap = async (event) => {
-  const urls = Array.from(document.querySelectorAll(".my-text")).map(
-    (ele) => ele.value
+const generateMindMapWithURL = (event) => {
+  modal.style.display = "block";
+  let urls = Array.from(document.querySelectorAll(".timed-script")).map(
+    (ele) => ele.href
   );
+  console.dir(urls);
+  getMindMap(event, urls=urls);
+};
+
+const getMindMap = async (event, urls = null) => {
+  if (!urls) {
+    urls = Array.from(document.querySelectorAll(".my-text")).map(
+      (ele) => ele.value
+    );
+  }
   await fetch(`http://127.0.0.1:8000?url=${urls}`, {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -70,6 +88,9 @@ const drawMindMap = (graph) => {
 
   svg.selectAll("*").remove();
 
+  console.log("CENTER");
+  console.log(`${left + scrollLeft + width / 2 - 50} ${top + scrollTop + height / 2 - 150}`);
+
   var simulation = d3
     .forceSimulation()
     .force(
@@ -81,8 +102,8 @@ const drawMindMap = (graph) => {
     .force(
       "center",
       d3.forceCenter(
-        left + scrollLeft + width / 2 - 50,
-        top + scrollTop + height / 2 - 150
+        width / 2,
+        height / 2
       )
     )
     .force(
@@ -99,11 +120,11 @@ const drawMindMap = (graph) => {
     .data(graph.links)
     .enter()
     .append("line")
-    .attr("stroke-width", function(d){
-      return d.weight
+    .attr("stroke-width", function (d) {
+      return d.weight;
     })
-    .attr("stroke", function(d){
-      return d.color
+    .attr("stroke", function (d) {
+      return d.color;
     });
 
   var node = svg
@@ -145,9 +166,19 @@ const drawMindMap = (graph) => {
         })
         .then((graph) => {
           graph["links"] = graph["links"].map((link) => {
-            if(link[0] === i.id || link[1] === i.id)
-              return { source: link[0], target: link[1], weight: 3, color: `rgb(${i.color[0]},${i.color[1]},${i.color[2]})` };
-            return { source: link[0], target: link[1], weight: 1, color: "black" };
+            if (link[0] === i.id || link[1] === i.id)
+              return {
+                source: link[0],
+                target: link[1],
+                weight: 3,
+                color: `rgb(${i.color[0]},${i.color[1]},${i.color[2]})`,
+              };
+            return {
+              source: link[0],
+              target: link[1],
+              weight: 1,
+              color: "black",
+            };
           });
           graph["nodes"] = graph["nodes"].map((node) => {
             node[1]["color"] = node[1]["color"].map((color) =>
@@ -176,7 +207,7 @@ const drawMindMap = (graph) => {
     })
     .attr("x", 6)
     .attr("y", 3)
-    .style("font-weight", "bold")
+    .style("font-weight", "bold");
 
   node.append("title").text(function (d) {
     return d.id;

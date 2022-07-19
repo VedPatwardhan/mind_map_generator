@@ -49,7 +49,7 @@ def on_click(event,
                                                    doc_heading,
                                                    words,
                                                    node_selected)
-        threshold = np.percentile(np.unique(adjacency_matrix), 97)
+        threshold = np.percentile(np.unique(adjacency_matrix), 85)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
         color = [style['color'] for node, style in graph.nodes(
@@ -163,5 +163,5 @@ def get_proximity_adjacency_matrix(adjacency_matrix,
                     for y in range(len(keyword_indices2)):
                         adjacency_matrix[keyword_idx1][keyword_idx2] += (
                             keyword_indices1[x] - keyword_indices2[y]) ** (-2)
-    threshold = np.percentile(np.unique(adjacency_matrix), 92)
+    threshold = np.percentile(np.unique(adjacency_matrix), 85)
     return adjacency_matrix, threshold
