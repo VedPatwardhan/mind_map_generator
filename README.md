@@ -25,6 +25,12 @@ python main.py
 ### Examples
 Click on any keyword to highlight it's relationship with other keywords
 
-**Django app**
+#### Django app
+<p>
+<img src="examples/django_app.png" width"100%">
+</p>
 
-**Python Script**
+#### Python Script
+<p>
+<img src="examples/python_script.png" width"100%">
+</p>
