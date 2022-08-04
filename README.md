@@ -1,25 +1,35 @@
 # mind_map_generator
 
-### Introduction
+## Introduction
 This is a django app developed to generate mind maps from spoken tutorials. The URLs for the tutorial scripts need to be entered into the app, which would generate the mind map for those scripts
 
-### Setting Up
-There are 2 ways to use this application, either as a regular python script or a django app.
+## Creating a virtual environment
 
-**Install the requirements**
+A virtual environment should be created and activated before installation of requirements
+
 ```
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+python/python3 -m venv mind_map_venv
+source mind_map_venv/bin/activate
 ```
-**Run as a django app**
+
+Based on the preference, a `conda` environment could also be used.
+
+---
+## Installation of requirements
+
+All the necessary python libraries can be installed using `pip` or `conda` inside the project folder.
+
+```
+pip install -r requirements.txt -q
+```
+
+---
+## Start the server
+
+The django server can then be started using the following inside the project folder.
+
 ```
 python manage.py runserver
-```
-**Run as a python script**
-```
-cd main_code
-python main.py
 ```
 
 ### Examples
@@ -27,10 +37,5 @@ Click on any keyword to highlight it's relationship with other keywords
 
 #### Django app
 <p>
-<img src="examples/django_app.png" width"100%">
-</p>
-
-#### Python Script
-<p>
-<img src="examples/python_script.png" width"100%">
+<img src="examples/django_app_final_integration.png" width"100%">
 </p>
