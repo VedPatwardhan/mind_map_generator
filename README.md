@@ -28,7 +28,7 @@ pip install -r requirements.txt -q
 ---
 ## Start the server
 
-The django server can then be started using the following inside the project folder.
+The django server can then be started using the following inside the project folder. Some example scipt urls which could be used are available inside `main_code/urls.txt`.
 
 ```
 python manage.py runserver
