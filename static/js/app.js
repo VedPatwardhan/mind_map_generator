@@ -137,6 +137,7 @@ const drawMindMap = (graph) => {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRFToken": csrftoken,
+          credentials: "include"
         },
         body: JSON.stringify({ ...graph, node_selected: i.id }),
       })
