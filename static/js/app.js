@@ -1,3 +1,6 @@
+const HOST_URL="http://127.0.0.1";
+const HOST_PORT="8000";
+
 const addInput = (event) => {
   const div = document.querySelector("#inputs");
   const text_input = getInput();
@@ -25,7 +28,7 @@ const getMindMap = async (event) => {
   const urls = Array.from(document.querySelectorAll(".my-text")).map(
     (ele) => ele.value
   );
-  await fetch(`http://127.0.0.1:8000?url=${urls}`, {
+  await fetch(`${HOST_URL}:${HOST_PORT}?url=${urls}`, {
     Accept: "application/json",
     "Content-Type": "application/json",
   })
@@ -131,7 +134,7 @@ const drawMindMap = (graph) => {
         return cookieValue;
       }
       var csrftoken = getCSRFToken("csrftoken");
-      await fetch(`http://127.0.0.1:8000`, {
+      await fetch(`${HOST_URL}:${HOST_PORT}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
