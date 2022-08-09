@@ -6,6 +6,7 @@ import json
 from django.shortcuts import render
 from django.conf import settings
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from main_code.parser import get_text
 from main_code.extractors import *
 from main_code.lemmatizers import *
@@ -13,6 +14,7 @@ from main_code.graph import *
 from main_code.utils import *
 
 
+@csrf_exempt
 def index(request):
     fig = None
     if request.method == "POST":
