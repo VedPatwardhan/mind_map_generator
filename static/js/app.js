@@ -160,6 +160,7 @@ const drawMindMap = (graph) => {
           "X-CSRFToken": csrftoken,
         },
         body: JSON.stringify({ ...graph, node_selected: i.id }),
+        credentials: "include"
       })
         .then((response) => {
           return response.json();
