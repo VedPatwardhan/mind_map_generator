@@ -61,4 +61,6 @@ def stanfordcorenlp_lemmatizer(sentences):
     for word_length in word_lengths:
         sentences.append(lemmatized_output[curr:curr+word_length])
         curr += word_length
+    for i in range(len(sentences)):
+        sentences[i] = [word.lower() for word in sentences[i]]
     return sentences

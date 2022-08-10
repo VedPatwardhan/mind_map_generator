@@ -17,7 +17,7 @@ def extract_table_content(soup):
     for row in rows:
         sent_tokens = word_tokenize(row.find_all('td')[1].text.strip('\n'))
         filtered_tokens = [w.lower() for w in sent_tokens
-                           if not w.islower() in stop_words and w.isalpha()]
+                           if not w.lower() in stop_words and w.isalpha()]
         sentences.append(filtered_tokens)
     return sentences
 

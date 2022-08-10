@@ -1,5 +1,6 @@
 from gensim.models import Word2Vec
 import numpy as np
+
 wv = None
 
 
@@ -28,59 +29,40 @@ def train_word2vec(sentences):
         alpha=0.03,
         min_alpha=0.0001,
         min_count=1,
-        seed=42
+        seed=42,
     )
     embedder.build_vocab(sentences, progress_per=2)
-    embedder.train(
-        sentences,
-        total_examples=embedder.corpus_count,
-        epochs=2
-    )
+    embedder.train(sentences, total_examples=embedder.corpus_count, epochs=2)
     return embedder
 
 
-def get_adjacency_matrix(adjacency_matrix,
-                         words,
-                         wv,
-                         all_headings,
-                         node_selected=""):
+def get_adjacency_matrix(adjacency_matrix, words, wv, all_headings, node_selected=""):
     for i in range(0, len(words)):
         factor = 1
         if words[i] == node_selected:
             factor = 5
-        for j in range(i+1, len(words)):
-            if words[i] not in all_headings \
-                    and words[j] not in all_headings:
-                adjacency_matrix[i][j] = np.abs(np.dot(wv[words[i]],
-                                                       wv[words[j]])) * factor
+        for j in range(i + 1, len(words)):
+            if words[i] not in all_headings and words[j] not in all_headings:
+                adjacency_matrix[i][j] = (
+                    np.abs(np.dot(wv[words[i]], wv[words[j]])) * factor
+                )
     return adjacency_matrix
 
 
-def get_trained_adjacency_matrix(adjacency_matrix,
-                                 doc_sentences,
-                                 doc_heading,
-                                 words):
+def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, words):
     all_sentences = get_all_sentences(doc_sentences)
     all_headings = get_all_headings(doc_heading)
     embedder = train_word2vec(all_sentences)
     global wv
     wv = embedder.wv
-    adjacency_matrix = get_adjacency_matrix(adjacency_matrix,
-                                            words,
-                                            wv,
-                                            all_headings)
+    adjacency_matrix = get_adjacency_matrix(adjacency_matrix, words, wv, all_headings)
     threshold = np.percentile(np.unique(adjacency_matrix), 85)
     return adjacency_matrix, threshold
 
 
-def update_adjacency_matrix(adjacency_matrix,
-                            doc_heading,
-                            words,
-                            node_selected):
+def update_adjacency_matrix(adjacency_matrix, doc_heading, words, node_selected):
     all_headings = get_all_headings(doc_heading)
     global wv
-    return get_adjacency_matrix(adjacency_matrix,
-                                words,
-                                wv,
-                                all_headings,
-                                node_selected)
+    return get_adjacency_matrix(
+        adjacency_matrix, words, wv, all_headings, node_selected
+    )

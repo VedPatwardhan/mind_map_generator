@@ -1,6 +1,7 @@
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use('Agg')
+
+matplotlib.use("Agg")
 import io
 import json
 from django.shortcuts import render
@@ -26,7 +27,7 @@ def index(request):
         adjacency_matrix = update_adjacency_matrix(
             np.array(adjacency_matrix), doc_heading, words, node_selected
         )
-        threshold = np.percentile(np.unique(adjacency_matrix), 97)
+        threshold = np.percentile(np.unique(adjacency_matrix), 85)
         response = {
             "nodes": [
                 (node["id"], {"color": [color / 255 for color in node["color"]]})
@@ -106,4 +107,6 @@ def index(request):
             safe=False,
         )
         return response
-    return render(request, "Command line arguments in C - English _ spoken-tutorial.org.html")
+    return render(
+        request, "Command line arguments in C - English _ spoken-tutorial.org.html"
+    )
