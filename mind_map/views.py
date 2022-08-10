@@ -26,7 +26,7 @@ def index(request):
         adjacency_matrix = update_adjacency_matrix(
             np.array(adjacency_matrix), doc_heading, words, node_selected
         )
-        threshold = np.percentile(np.unique(adjacency_matrix), 97)
+        threshold = np.percentile(np.unique(adjacency_matrix), 92)
         response = {
             "nodes": [
                 (node["id"], {"color": [color / 255 for color in node["color"]]})
