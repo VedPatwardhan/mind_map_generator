@@ -20,13 +20,11 @@ def index(request):
     if request.method == "POST":
         json_body = json.loads(request.body)
         adjacency_matrix = json_body["adjacency_matrix"]
+        doc_sentences = json_body["doc_sentences"]
         doc_heading = json_body["doc_heading"]
         words = json_body["words"]
         node_selected = json_body["node_selected"]
-        adjacency_matrix = update_adjacency_matrix(
-            np.array(adjacency_matrix), doc_heading, words, node_selected
-        )
-        threshold = np.percentile(np.unique(adjacency_matrix), 92)
+        adjacency_matrix, threshold = get_trained_adjacency_matrix(np.array(adjacency_matrix), doc_sentences, doc_heading, words, node_selected)
         response = {
             "nodes": [
                 (node["id"], {"color": [color / 255 for color in node["color"]]})
@@ -34,6 +32,7 @@ def index(request):
             ],
             "links": [],
             "adjacency_matrix": adjacency_matrix.tolist(),
+            "doc_sentences": doc_sentences,
             "doc_heading": doc_heading,
             "words": words,
         }
@@ -101,6 +100,7 @@ def index(request):
                 "links": list(G.edges()),
                 "adjacency_matrix": adjacency_matrix.tolist(),
                 "doc_heading": doc_heading,
+                "doc_sentences": doc_sentences,
                 "words": words,
             },
             safe=False,
