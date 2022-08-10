@@ -51,7 +51,6 @@ def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, w
     all_sentences = get_all_sentences(doc_sentences)
     all_headings = get_all_headings(doc_heading)
     embedder = train_word2vec(all_sentences)
-    global wv
     wv = embedder.wv
     adjacency_matrix = get_adjacency_matrix(adjacency_matrix, words, wv, all_headings, node_selected)
     threshold = np.percentile(np.unique(adjacency_matrix), 85)
