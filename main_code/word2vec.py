@@ -1,8 +1,6 @@
 from gensim.models import Word2Vec
 import numpy as np
 
-wv = None
-
 
 def get_all_headings(doc_heading):
     all_headings = []
@@ -49,20 +47,12 @@ def get_adjacency_matrix(adjacency_matrix, words, wv, all_headings, node_selecte
     return adjacency_matrix
 
 
-def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, words):
+def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, words, node_selected=""):
     all_sentences = get_all_sentences(doc_sentences)
     all_headings = get_all_headings(doc_heading)
     embedder = train_word2vec(all_sentences)
-    global wv
     wv = embedder.wv
-    adjacency_matrix = get_adjacency_matrix(adjacency_matrix, words, wv, all_headings)
+    adjacency_matrix = get_adjacency_matrix(adjacency_matrix, words, wv, all_headings, node_selected)
     threshold = np.percentile(np.unique(adjacency_matrix), 85)
     return adjacency_matrix, threshold
 
-
-def update_adjacency_matrix(adjacency_matrix, doc_heading, words, node_selected):
-    all_headings = get_all_headings(doc_heading)
-    global wv
-    return get_adjacency_matrix(
-        adjacency_matrix, words, wv, all_headings, node_selected
-    )
