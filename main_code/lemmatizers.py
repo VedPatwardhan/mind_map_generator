@@ -64,6 +64,4 @@ def stanfordcorenlp_lemmatizer(sentences, special_seq):
         curr += word_length
     for i in range(len(sentences)):
         sentences[i] = [word.lower() for word in sentences[i]]
-    print('special_seq', special_seq)
-    print('sentences', sentences)
     return sentences
