@@ -115,14 +115,3 @@ def index(request):
     return render(
         request, "Command line arguments in C - English _ spoken-tutorial.org.html"
     )
-
-"""
-subscribe
-login
-
-outline
-keywords
-programming language focus
-use pdfs
-remove unnecessary
-"""
