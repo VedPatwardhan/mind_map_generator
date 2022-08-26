@@ -1,9 +1,9 @@
-var modal = document.querySelector("#myModal")
+var modal = document.querySelector("#myModal");
 var span = document.querySelector(".close");
 
 span.onclick = () => {
   modal.style.display = "none";
-}
+};
 
 const addInput = (event) => {
   const div = document.querySelector("#inputs");
@@ -33,20 +33,42 @@ const generateMindMapWithURL = (event) => {
   let urls = Array.from(document.querySelectorAll(".timed-script")).map(
     (ele) => ele.href
   );
-  console.dir(urls);
-  getMindMap(event, urls=urls);
+  let outline = document.querySelector(".custom-jumbotron p").textContent;
+  outline = outline.substring(outline.search("\n"));
+  outline = outline.replace(/\s+/g, " ").replace(/^\s|\s$/g, "");
+  outline = outline.replace(",", "");
+  let metas = Array.from(document.querySelectorAll("meta"));
+  let keywords = metas.filter((ele) => ele.name && ele.name == "keywords")[0]
+    .content;
+  keywords = keywords.substring(keywords.search(",")+1);
+  keywords = keywords.replace(",", "");
+  getMindMap(
+    event,
+    (urls = urls),
+    (outline = outline),
+    (keywords = keywords)
+  );
 };
 
-const getMindMap = async (event, urls = null) => {
+const getMindMap = async (
+  event,
+  urls = null,
+  outline = null,
+  keywords = null,
+  description = null
+) => {
   if (!urls) {
     urls = Array.from(document.querySelectorAll(".my-text")).map(
       (ele) => ele.value
     );
   }
-  await fetch(`/?url=${urls}`, {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  })
+  await fetch(
+    `/?url=${urls}&outline=${outline}&keywords=${keywords}&description=${description}`,
+    {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    }
+  )
     .then((response) => {
       return response.json();
     })
@@ -89,7 +111,11 @@ const drawMindMap = (graph) => {
   svg.selectAll("*").remove();
 
   console.log("CENTER");
-  console.log(`${left + scrollLeft + width / 2 - 50} ${top + scrollTop + height / 2 - 150}`);
+  console.log(
+    `${left + scrollLeft + width / 2 - 50} ${
+      top + scrollTop + height / 2 - 150
+    }`
+  );
 
   var simulation = d3
     .forceSimulation()
@@ -99,13 +125,7 @@ const drawMindMap = (graph) => {
         .forceManyBody()
         .strength(-Math.floor((1500.0 * 15.0) / graph["nodes"].length))
     )
-    .force(
-      "center",
-      d3.forceCenter(
-        width / 2,
-        height / 2
-      )
-    )
+    .force("center", d3.forceCenter(width / 2, height / 2))
     .force(
       "link",
       d3.forceLink().id(function (d) {
@@ -160,7 +180,7 @@ const drawMindMap = (graph) => {
           "X-CSRFToken": csrftoken,
         },
         body: JSON.stringify({ ...graph, node_selected: i.id }),
-        credentials: "include"
+        credentials: "include",
       })
         .then((response) => {
           return response.json();

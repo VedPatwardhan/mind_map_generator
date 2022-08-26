@@ -596,5 +596,3 @@ Rupakrokade
 Sanmugam
 Shalu sankar
 St-admin
-speak
-thank

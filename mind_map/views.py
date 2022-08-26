@@ -44,6 +44,9 @@ def index(request):
         return JsonResponse(response, safe=False)
     elif len(request.GET.getlist("url")):
         URLS = [url for url in request.GET.get("url").split(",") if url != ""]
+        outline_seq = request.GET.get("outline").lower().split();
+        keywords_seq = request.GET.get("keywords").lower().split();
+        special_seq = outline_seq + keywords_seq
         doc_sentences = []
         doc_heading = []
         for URL in URLS:
@@ -51,13 +54,15 @@ def index(request):
             doc_sentences.append(sentences)
             doc_heading.append(heading)
         contributors = get_contributors()
+        words_to_ignore = get_words_to_ignore()
         for i in range(len(URLS)):
             for j in range(len(doc_sentences[i])):
                 doc_sentences[i][j] = [
-                    word for word in doc_sentences[i][j] if word not in contributors
+                    word for word in doc_sentences[i][j] if word not in set(contributors + words_to_ignore)
                 ]
+        special_seq = [word for word in special_seq if word not in set(contributors + words_to_ignore)]
         for i in range(len(URLS)):
-            doc_sentences[i] = stanfordcorenlp_lemmatizer(doc_sentences[i])
+            doc_sentences[i] = stanfordcorenlp_lemmatizer(doc_sentences[i], special_seq)
         doc_keywords = []
         for i in range(len(URLS)):
             doc_keywords.append(bert_extractor(doc_sentences[i], 1, 15))
@@ -110,3 +115,14 @@ def index(request):
     return render(
         request, "Command line arguments in C - English _ spoken-tutorial.org.html"
     )
+
+"""
+subscribe
+login
+
+outline
+keywords
+programming language focus
+use pdfs
+remove unnecessary
+"""
