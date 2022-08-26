@@ -53,6 +53,5 @@ def get_trained_adjacency_matrix(adjacency_matrix, doc_sentences, doc_heading, w
     embedder = train_word2vec(all_sentences)
     wv = embedder.wv
     adjacency_matrix = get_adjacency_matrix(adjacency_matrix, words, wv, all_headings, node_selected)
-    threshold = np.percentile(np.unique(adjacency_matrix), 85)
+    threshold = np.percentile(np.unique(adjacency_matrix), 80)
     return adjacency_matrix, threshold
-

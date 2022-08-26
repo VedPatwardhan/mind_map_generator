@@ -49,7 +49,7 @@ def on_click(event,
                                                    doc_heading,
                                                    words,
                                                    node_selected)
-        threshold = np.percentile(np.unique(adjacency_matrix), 97)
+        threshold = np.percentile(np.unique(adjacency_matrix), 80)
         graph.remove_edges_from(graph.edges())
         add_edges_based_on_threshold(graph, words, adjacency_matrix, threshold)
         color = [style['color'] for node, style in graph.nodes(
